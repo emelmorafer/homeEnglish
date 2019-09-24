@@ -13,7 +13,7 @@ import com.ceiba.homeenglish.domain.Cliente;
 public class ClienteServiceImpl implements ClienteService{
 	
 	@Autowired
-    ClienteDao clienteDao;
+    ClienteDao clienteDao;//Holi
 	
 	public Cliente guardarCliente(Cliente cliente) {		
 		return clienteDao.save(cliente);		

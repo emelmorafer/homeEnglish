@@ -29,7 +29,7 @@ public class Cita {
 	@Column(nullable = false)
 	private LocalDateTime fechaFin;
 		
-	@Column(nullable = false)
+	@Column(nullable = false) //holi
 	private int cantidadHoras;
 	
 	@Column(nullable = true)
