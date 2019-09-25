@@ -10,22 +10,23 @@ import javax.persistence.Id;
 public class Cliente {
 	
 	@Id
+	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	
-	@Column(nullable = false)
+	@Column(name = "cedula", nullable = false)
 	private String cedula;
 	
-	@Column(nullable = false)
+	@Column(name = "nombre", nullable = false)
 	private String nombre;
 	
-	@Column(nullable = true)
-	private int edad;
-	
-	@Column(nullable = false)
+	@Column(name = "apellido", nullable = false)
 	private String apellido;
 	
-	@Column(nullable = true)
+	@Column(name = "edad", nullable = true)
+	private int edad;
+	
+	@Column(name = "direccion", nullable = true)
 	private String direccion;
 	
 	
@@ -66,6 +67,14 @@ public class Cliente {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+	
+	public String getApellido() {
+		return apellido;
+	}
+
+	public void setApellido(String apellido) {
+		this.apellido = apellido;
+	}
 
 	public int getEdad() {
 		return edad;
@@ -73,14 +82,6 @@ public class Cliente {
 
 	public void setEdad(int edad) {
 		this.edad = edad;
-	}
-
-	public String getApellido() {
-		return apellido;
-	}
-
-	public void setApellido(String apellido) {
-		this.apellido = apellido;
 	}
 
 	public String getDireccion() {

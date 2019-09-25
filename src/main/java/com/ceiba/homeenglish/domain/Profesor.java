@@ -10,22 +10,23 @@ import javax.persistence.Id;
 public class Profesor {
 	
 	@Id
+	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	
-	@Column(nullable = false)
+	@Column(name = "cedula", nullable = false)
 	private String cedula;
 	
-	@Column(nullable = false)
+	@Column(name = "nombre", nullable = false)
 	private String nombre;
 	
-	@Column(nullable = false)
+	@Column(name = "apellido", nullable = false)
 	private String apellido;
 	
-	@Column(nullable = true)
+	@Column(name = "edad", nullable = true)
 	private int edad;	
 	
-	@Column(nullable = true)
+	@Column(name = "direccion", nullable = true)
 	private String direccion;
 	
 	

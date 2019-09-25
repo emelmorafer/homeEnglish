@@ -27,9 +27,7 @@ import testDataBuilder.ClienteTestDataBuilder;
 @WebMvcTest(ClienteRestController.class)
 public class ClienteTest {
 
-	private static final long ID_CLIENTE_PRUEBA = 10L;
-	private static final long ID_CLIENTE_PRUEBA2 = 11L;
-	private static final String NOMBRE_CLIENTE_PRUEBA = "Emel";
+	private static final long ID_CLIENTE_PRUEBA = 1L;
 
 	@Autowired
 	private ObjectMapper objectMapper;
@@ -51,8 +49,6 @@ public class ClienteTest {
 	public void obtenerClientePorIdTest() throws Exception {
 
 		// arrange
-		Cliente cliente = new ClienteTestDataBuilder().conId(ID_CLIENTE_PRUEBA).build();
-		clienteServiceReal.guardarCliente(cliente);
 
 		// act - assert
 		mocMvc.perform(get("/api/getClienteById").param("id",String.valueOf(ID_CLIENTE_PRUEBA))).andDo(print())

@@ -24,9 +24,14 @@ public class CitaRestController {
 		return citaService.guardarCita(cita);
 	}
 	
-	@RequestMapping(value = "/actualizarCita", method = RequestMethod.PUT)
-    public Cita actualizarCita(@RequestBody Cita cita) {		
-		return citaService.actualizarCita(cita);
+	@RequestMapping(value = "/aprobarCitaPorId", method = RequestMethod.GET)
+    public boolean aprobarCitaPorId(@RequestParam(value="id") long id) {		
+		return citaService.aprobarCitaPorId(id);
+	}
+	
+	@RequestMapping(value = "/rechazarCitaPorId", method = RequestMethod.GET)
+    public boolean rechazarCitaPorId(@RequestParam(value="id") long id) {		
+		return citaService.rechazarCitaPorId(id);
 	}
 	
 	@RequestMapping(value = "/getCitaById", method = RequestMethod.GET)
@@ -37,6 +42,11 @@ public class CitaRestController {
 	@RequestMapping(value = "/getListCita", method = RequestMethod.GET)
     public List<Cita> getListCita() {		
 		return citaService.obtenerListadoCitas();
+	}
+	
+	@RequestMapping(value = "/verificarValidesGuardadoDeCita", method = RequestMethod.GET)
+    public boolean verificarValidesGuardadoDeCita(@RequestBody Cita cita) {		
+		return citaService.verificarValidesGuardadoDeCita(cita);
 	}
 
 }

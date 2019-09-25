@@ -6,50 +6,57 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 @Entity(name = "Cita")
 public class Cita {
 	
 	@Id
+	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	
-	@Column(nullable = false)
-	private long idCliente;
+	@ManyToOne
+	@JoinColumn(name = "id_cliente", referencedColumnName = "id")
+	private Cliente cliente;
 	
-	@Column(nullable = false)
-	private long idProfesor;
+	@ManyToOne
+	@JoinColumn(name = "id_profesor", referencedColumnName = "id")
+	private Profesor profesor;
 	
-	@Column(nullable = false)
+	@Column(name = "estado_cita", nullable = false)
 	private String estadoCita;
 	
-	@Column(nullable = false)
+	@Column(name = "fecha_inicio", nullable = false)
 	private LocalDateTime fechaInicio;
 	
-	@Column(nullable = false)
+	@Column(name = "fecha_fin", nullable = false)
 	private LocalDateTime fechaFin;
 		
-	@Column(nullable = false) //holi
+	@Column(name = "cantidad_horas", nullable = false)
 	private int cantidadHoras;
 	
-	@Column(nullable = true)
+	@Column(name = "precio", nullable = true)
 	private double precio;
 	
-	@Column(nullable = false)
+	@Column(name = "direccion", nullable = false)
 	private String direccion;
 	
-	@Column(nullable = true)
+	@Column(name = "nota", nullable = true)
 	private String nota;
 	
 	
 	public Cita() {}
 	
-	public Cita(long id, long idCliente, long idProfesor, String estadoCita, LocalDateTime fechaInicio,
+
+	public Cita(long id, Cliente cliente, Profesor profesor, String estadoCita, LocalDateTime fechaInicio,
 			LocalDateTime fechaFin, int cantidadHoras, double precio, String direccion, String nota) {
 		super();
 		this.id = id;
-		this.idCliente = idCliente;
-		this.idProfesor = idProfesor;
+		this.cliente = cliente;
+		this.profesor = profesor;
 		this.estadoCita = estadoCita;
 		this.fechaInicio = fechaInicio;
 		this.fechaFin = fechaFin;
@@ -58,8 +65,8 @@ public class Cita {
 		this.direccion = direccion;
 		this.nota = nota;
 	}
-	
 
+	
 	public long getId() {
 		return id;
 	}
@@ -68,20 +75,20 @@ public class Cita {
 		this.id = id;
 	}
 
-	public long getIdCliente() {
-		return idCliente;
+	public Cliente getCliente() {
+		return cliente;
 	}
 
-	public void setIdCliente(long idCliente) {
-		this.idCliente = idCliente;
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
 	}
 
-	public long getIdProfesor() {
-		return idProfesor;
+	public Profesor getProfesor() {
+		return profesor;
 	}
 
-	public void setIdProfesor(long idProfesor) {
-		this.idProfesor = idProfesor;
+	public void setProfesor(Profesor profesor) {
+		this.profesor = profesor;
 	}
 
 	public String getEstadoCita() {

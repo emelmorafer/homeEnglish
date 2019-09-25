@@ -34,6 +34,7 @@ public class ClienteRestController {
 	@RequestMapping(value = "/getClienteById", method = RequestMethod.GET)
     public Cliente getClienteByID(@RequestParam(value="id") long id) {		
 		return clienteService.obtenerClientePorId(id);
+
 	}
 	
 	@RequestMapping(value = "/getListCliente", method = RequestMethod.GET)
