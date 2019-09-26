@@ -2,16 +2,14 @@ package com.ceiba.homeenglish.service;
 
 import java.util.List;
 
-import com.ceiba.homeenglish.domain.Profesor;
+import com.ceiba.homeenglish.dto.ProfesorDto;
 
 public interface ProfesorService {
 			
-	public Profesor guardarProfesor(Profesor profesor);
+	public ProfesorDto guardarProfesor(ProfesorDto profesor);
 	
-	public Profesor actualizarProfesor(Profesor profesor);
+	public ProfesorDto obtenerProfesorPorId(long id);
 	
-	public Profesor obtenerProfesorPorId(long id);
-	
-	public List<Profesor> obtenerListadoProfesores();
+	public List<ProfesorDto> obtenerListadoProfesores();
 	
 }

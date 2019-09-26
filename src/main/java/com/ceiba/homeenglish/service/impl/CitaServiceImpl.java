@@ -7,8 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ceiba.homeenglish.service.CitaService;
+import com.ceiba.homeenglish.builder.CitaBuilder;
 import com.ceiba.homeenglish.dao.CitaDao;
 import com.ceiba.homeenglish.domain.Cita;
+import com.ceiba.homeenglish.dto.CitaDto;
 
 @Service
 public class CitaServiceImpl implements CitaService{
@@ -22,14 +24,16 @@ public class CitaServiceImpl implements CitaService{
 	@Autowired
     CitaDao citaDao;
 	
-	public Cita guardarCita(Cita cita) {		
-		if (verificarValidesGuardadoDeCita(cita)) {
-			cita.setEstadoCita(ESTADO_CREACION);
-			cita.setPrecio(calcularPrecioCita(cita));
-			cita.setFechaFin(obtenerFechaFinCita(cita));			
+	public CitaDto guardarCita(CitaDto citaDto) {		
+		if (verificarValidesGuardadoDeCita(citaDto)) {
+			citaDto.setEstadoCita(ESTADO_CREACION);
+			citaDto.setPrecio(calcularPrecioCita(citaDto));
+			citaDto.setFechaFin(obtenerFechaFinCita(citaDto));			
 			try {
+				Cita cita = CitaBuilder.convertirAEntity(citaDto);
 				citaDao.save(cita);
-				return cita;
+				return CitaBuilder.convertirADto(cita);
+				
     		} catch (Exception e) {
     			return null;
     		}						
@@ -38,21 +42,21 @@ public class CitaServiceImpl implements CitaService{
 		}
 	}
 	
-	public double calcularPrecioCita(Cita cita) {
+	public double calcularPrecioCita(CitaDto cita) {
 		return PRECIO_HORA_CITA*cita.getCantidadHoras();
 	}
 	
-	public LocalDateTime obtenerFechaFinCita(Cita cita) {
+	public LocalDateTime obtenerFechaFinCita(CitaDto cita) {
 		return cita.getFechaInicio().plusHours(cita.getCantidadHoras());
 	}
 	
 
     public boolean aprobarCitaPorId(long id) {    	
-    	Cita cita = citaDao.findById(id).get();  	
+    	CitaDto cita = citaDao.citaDtoObtenerPorId(id);  	
     	if(cita != null) {
     		try {
     			cita.setEstadoCita(ESTADO_APROBACION); 
-    			citaDao.save(cita);	
+    			citaDao.save(CitaBuilder.convertirAEntity(cita));	
     			return true;
     		} catch (Exception e) {
     			return false;
@@ -63,11 +67,11 @@ public class CitaServiceImpl implements CitaService{
     }
     
     public boolean rechazarCitaPorId(long id) {    	
-    	Cita cita = citaDao.findById(id).get();  	
+    	CitaDto cita = citaDao.citaDtoObtenerPorId(id);	
     	if(cita != null) {
     		try {
     			cita.setEstadoCita(ESTADO_RECHAZO); 
-    			citaDao.save(cita);	
+    			citaDao.save(CitaBuilder.convertirAEntity(cita));
     			return true;
     		} catch (Exception e) {
     			return false;
@@ -77,7 +81,7 @@ public class CitaServiceImpl implements CitaService{
     	}
     }
     
-	public boolean verificarVencimientoCita(Cita cita, LocalDateTime fechaActual) {
+	public boolean verificarVencimientoCita(CitaDto cita, LocalDateTime fechaActual) {
 		LocalDateTime fechaEn24Horas = fechaActual.plusHours(NUMERO_HORAS_DIA);
 		if (cita.getFechaInicio().isBefore(fechaEn24Horas)) {
 			return true;
@@ -87,26 +91,26 @@ public class CitaServiceImpl implements CitaService{
 	}
     
 
-    public Cita obtenerCitaPorId(long id) {
-    	return citaDao.findById(id).get();
+    public CitaDto obtenerCitaPorId(long id) {
+    	return citaDao.citaDtoObtenerPorId(id);
     }
     
 
-    public List<Cita> obtenerListadoCitas(){
-    	return (List<Cita>) citaDao.findAll();
+    public List<CitaDto> obtenerListadoCitas(){
+    	return citaDao.citaDtoObtenerTodas();
     }
     
     
-    public List<Cita> obtenerListadoCitasPorProfesor(long idProfesor){
-    	return (List<Cita>) citaDao.obtenerCitasAprobadasPorIdProfesor(idProfesor);
+    public List<CitaDto> obtenerListadoCitasPorProfesor(long idProfesor){
+    	return citaDao.obtenerCitasAprobadasPorIdProfesor(idProfesor);
     }
     
 	
-	public List<Cita> obtenerListadoCitasPorCliente(long idCliente){
-		return (List<Cita>) citaDao.obtenerCitasAprobadasPorIdCliente(idCliente);
+	public List<CitaDto> obtenerListadoCitasPorCliente(long idCliente){
+		return citaDao.obtenerCitasAprobadasPorIdCliente(idCliente);
 	}
 	
-	public boolean verificarCruce2Citas(Cita citaPorGuardar, Cita citaGuardada) {	
+	public boolean verificarCruce2Citas(CitaDto citaPorGuardar, CitaDto citaGuardada) {	
 		citaPorGuardar.setFechaFin(obtenerFechaFinCita(citaPorGuardar));
 		if(citaPorGuardar.getFechaInicio().isAfter(citaGuardada.getFechaInicio()) &&
 		   citaPorGuardar.getFechaInicio().isBefore(citaGuardada.getFechaFin())) {		
@@ -127,9 +131,9 @@ public class CitaServiceImpl implements CitaService{
 	}
 	
 
-	public boolean verificarValidesGuardadoDeCita(Cita cita) {		
-		List<Cita> listadoCitas = citaDao.obtenerCitasAprobadasPorIdProfesor(cita.getProfesor().getId());		
-		for (Cita citaGuardada : listadoCitas) {			
+	public boolean verificarValidesGuardadoDeCita(CitaDto cita) {		
+		List<CitaDto> listadoCitas = citaDao.obtenerCitasNoRechazadasPorIdProfesor(cita.getIdProfesor());		
+		for (CitaDto citaGuardada : listadoCitas) {			
 			if(verificarCruce2Citas(cita,citaGuardada)){
 				return false;
 			}
@@ -138,8 +142,8 @@ public class CitaServiceImpl implements CitaService{
 	}
 		
 	public void rechazarCitasVencidas() {		
-		List<Cita> listadoCitas = citaDao.obtenerCitasPendientesDePago(LocalDateTime.now());		
-		for (Cita cita : listadoCitas) {			
+		List<CitaDto> listadoCitas = citaDao.obtenerCitasPendientesDePago(LocalDateTime.now());		
+		for (CitaDto cita : listadoCitas) {			
 			if(verificarVencimientoCita(cita, LocalDateTime.now())) {
 				rechazarCitaPorId(cita.getId());
 			}	

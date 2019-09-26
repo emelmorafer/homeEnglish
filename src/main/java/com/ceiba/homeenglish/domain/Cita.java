@@ -8,7 +8,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 
 @Entity(name = "Cita")
 public class Cita {
@@ -16,7 +15,7 @@ public class Cita {
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
+	private Long id;
 	
 	@ManyToOne
 	@JoinColumn(name = "id_cliente", referencedColumnName = "id")
@@ -49,29 +48,13 @@ public class Cita {
 	
 	
 	public Cita() {}
-	
-
-	public Cita(long id, Cliente cliente, Profesor profesor, String estadoCita, LocalDateTime fechaInicio,
-			LocalDateTime fechaFin, int cantidadHoras, double precio, String direccion, String nota) {
-		super();
-		this.id = id;
-		this.cliente = cliente;
-		this.profesor = profesor;
-		this.estadoCita = estadoCita;
-		this.fechaInicio = fechaInicio;
-		this.fechaFin = fechaFin;
-		this.cantidadHoras = cantidadHoras;
-		this.precio = precio;
-		this.direccion = direccion;
-		this.nota = nota;
-	}
 
 	
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

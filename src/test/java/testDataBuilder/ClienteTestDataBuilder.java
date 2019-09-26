@@ -1,10 +1,9 @@
 package testDataBuilder;
 
-import com.ceiba.homeenglish.domain.Cliente;
+import com.ceiba.homeenglish.dto.ClienteDto;
 
 public class ClienteTestDataBuilder {
 
-	private static final long ID = 10L;
 	private static final String NOMBRE = "Carlos";
 	private static final String CEDULA = "1128532784";
 	private static final int EDAD = 33;
@@ -12,7 +11,7 @@ public class ClienteTestDataBuilder {
 	private static final String DIRECCION = "Cra 14 # 56 - 36";
 	
 	
-	private long id;
+	private Long id;
 	private String cedula;
 	private String nombre;
 	private int edad;
@@ -20,7 +19,6 @@ public class ClienteTestDataBuilder {
 	private String direccion;
 	
 	public ClienteTestDataBuilder() {
-		this.id = ID;
 		this.cedula = CEDULA;
 		this.nombre = NOMBRE;
 		this.edad = EDAD;
@@ -28,7 +26,7 @@ public class ClienteTestDataBuilder {
 		this.direccion = DIRECCION;
 	}
 	
-	public ClienteTestDataBuilder conId(long id) {
+	public ClienteTestDataBuilder conId(Long id) {
 		this.id=id;
 		return this;
 	}
@@ -53,8 +51,8 @@ public class ClienteTestDataBuilder {
 		return this;
 	}
 	
-	public Cliente build() {
-		return new Cliente(this.id,this.cedula,this.nombre,this.edad,this.apellido,this.direccion);
+	public ClienteDto build() {
+		return new ClienteDto(this.id,this.cedula,this.nombre,this.edad,this.apellido,this.direccion);
 	}
 
 

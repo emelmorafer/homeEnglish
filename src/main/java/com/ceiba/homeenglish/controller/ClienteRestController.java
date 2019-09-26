@@ -3,13 +3,14 @@ package com.ceiba.homeenglish.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ceiba.homeenglish.domain.Cliente;
+import com.ceiba.homeenglish.dto.ClienteDto;
 import com.ceiba.homeenglish.service.ClienteService;
 
 @RestController
@@ -21,24 +22,19 @@ public class ClienteRestController {
 	ClienteService clienteService; 
 	
 	
-	@RequestMapping(value = "/guardarCliente", method = RequestMethod.POST)
-    public Cliente guardarCliente(@RequestBody Cliente cliente) {		
+	@PostMapping(value = "/guardarCliente")
+    public ClienteDto guardarCliente(@RequestBody ClienteDto cliente) {		
 		return clienteService.guardarCliente(cliente);
 	}
 	
-	@RequestMapping(value = "/actualizarCliente", method = RequestMethod.PUT)
-    public Cliente actualizarCliente(@RequestBody Cliente cliente) {		
-		return clienteService.actualizarCliente(cliente);
-	}
-	
-	@RequestMapping(value = "/getClienteById", method = RequestMethod.GET)
-    public Cliente getClienteByID(@RequestParam(value="id") long id) {		
+	@GetMapping(value = "/getClienteById")
+    public ClienteDto getClienteByID(@RequestParam(value="id") long id) {		
 		return clienteService.obtenerClientePorId(id);
 
 	}
 	
-	@RequestMapping(value = "/getListCliente", method = RequestMethod.GET)
-    public List<Cliente> getListCliente() {		
+	@GetMapping(value = "/getListCliente")
+    public List<ClienteDto> getListCliente() {		
 		return clienteService.obtenerListadoClientes();
 	}
 

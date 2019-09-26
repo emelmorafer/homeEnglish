@@ -1,6 +1,6 @@
 package testDataBuilder;
 
-import com.ceiba.homeenglish.domain.Profesor;
+import com.ceiba.homeenglish.dto.ProfesorDto;
 
 public class ProfesorTestDataBuilder {
 
@@ -12,7 +12,7 @@ public class ProfesorTestDataBuilder {
 	private static final String DIRECCION = "Cra 14 # 56 - 36";
 	
 	
-	private long id;
+	private Long id;
 	private String cedula;
 	private String nombre;
 	private int edad;
@@ -26,6 +26,11 @@ public class ProfesorTestDataBuilder {
 		this.edad = EDAD;
 		this.apellido = APELLIDO;
 		this.direccion = DIRECCION;
+	}
+	
+	public ProfesorTestDataBuilder conId(Long id) {
+		this.id=id;
+		return this;
 	}
 
 	public ProfesorTestDataBuilder conCedula(String cedula) {
@@ -49,8 +54,8 @@ public class ProfesorTestDataBuilder {
 	}
 	
 	
-	public Profesor build() {		
-		return new Profesor(this.id,this.cedula,this.nombre,this.apellido,this.edad,this.direccion);
+	public ProfesorDto build() {		
+		return new ProfesorDto(this.id,this.cedula,this.nombre,this.edad,this.apellido,this.direccion);
 	}
 
 

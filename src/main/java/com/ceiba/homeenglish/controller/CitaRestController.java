@@ -3,13 +3,14 @@ package com.ceiba.homeenglish.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ceiba.homeenglish.domain.Cita;
+import com.ceiba.homeenglish.dto.CitaDto;
 import com.ceiba.homeenglish.service.CitaService;
 
 @RestController
@@ -19,33 +20,33 @@ public class CitaRestController {
 	@Autowired
 	CitaService citaService; 
 	
-	@RequestMapping(value = "/guardarCita", method = RequestMethod.POST)
-    public Cita guardarCita(@RequestBody Cita cita) {		
+	@PostMapping(value = "/guardarCita")
+    public CitaDto guardarCita(@RequestBody CitaDto cita) {		
 		return citaService.guardarCita(cita);
 	}
 	
-	@RequestMapping(value = "/aprobarCitaPorId", method = RequestMethod.GET)
+	@GetMapping(value = "/aprobarCitaPorId")
     public boolean aprobarCitaPorId(@RequestParam(value="id") long id) {		
 		return citaService.aprobarCitaPorId(id);
 	}
 	
-	@RequestMapping(value = "/rechazarCitaPorId", method = RequestMethod.GET)
+	@GetMapping(value = "/rechazarCitaPorId")
     public boolean rechazarCitaPorId(@RequestParam(value="id") long id) {		
 		return citaService.rechazarCitaPorId(id);
 	}
 	
-	@RequestMapping(value = "/getCitaById", method = RequestMethod.GET)
-    public Cita getCitaByID(@RequestParam(value="id") long id) {		
+	@GetMapping(value = "/getCitaById")
+    public CitaDto getCitaByID(@RequestParam(value="id") long id) {		
 		return citaService.obtenerCitaPorId(id);
 	}
 	
-	@RequestMapping(value = "/getListCita", method = RequestMethod.GET)
-    public List<Cita> getListCita() {		
+	@GetMapping(value = "/getListCita")
+    public List<CitaDto> getListCita() {		
 		return citaService.obtenerListadoCitas();
 	}
 	
-	@RequestMapping(value = "/verificarValidesGuardadoDeCita", method = RequestMethod.GET)
-    public boolean verificarValidesGuardadoDeCita(@RequestBody Cita cita) {		
+	@PostMapping(value = "/verificarValidesGuardadoDeCita")
+    public boolean verificarValidesGuardadoDeCita(@RequestBody CitaDto cita) {		
 		return citaService.verificarValidesGuardadoDeCita(cita);
 	}
 

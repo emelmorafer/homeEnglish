@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.ceiba.homeenglish.domain.Cita;
+import com.ceiba.homeenglish.dto.CitaDto;
 import com.ceiba.homeenglish.service.CitaService;
 import com.ceiba.homeenglish.service.impl.CitaServiceImpl;
 
@@ -34,7 +34,7 @@ public class CitaTest {
 	@Test
 	public void calcularPrecioCitaTest() {
 		// arrange
-		Cita cita = new CitaTestDataBuilder().conCantidadHoras(DOS_HORAS).build();
+		CitaDto cita = new CitaTestDataBuilder().conCantidadHoras(DOS_HORAS).build();
 		// act
 		double precio = citaService.calcularPrecioCita(cita);	
 		// assert
@@ -45,7 +45,7 @@ public class CitaTest {
 	public void obtenerFechaFinCitaTest() {
 		// arrange
 		LocalDateTime fechaAhora = LocalDateTime.now();
-		Cita cita = new CitaTestDataBuilder()
+		CitaDto cita = new CitaTestDataBuilder()
 				.conFechaInicio(fechaAhora).conCantidadHoras(DOS_HORAS).build();
 		// act
 		LocalDateTime fechaFinal = citaService.obtenerFechaFinCita(cita);	
@@ -57,7 +57,7 @@ public class CitaTest {
 	public void verificarCitaVencidaTest() {
 		// arrange
 		LocalDateTime fechaAhora = LocalDateTime.now();
-		Cita cita = new CitaTestDataBuilder().conFechaInicio(fechaAhora.plusHours(DOS_HORAS)).build();
+		CitaDto cita = new CitaTestDataBuilder().conFechaInicio(fechaAhora.plusHours(DOS_HORAS)).build();
 		// act
 		boolean citaVencida = citaService.verificarVencimientoCita(cita,fechaAhora);	
 		// assert
@@ -68,7 +68,7 @@ public class CitaTest {
 	public void verificarCitaNoVencidaTest() {
 		// arrange
 		LocalDateTime fechaAhora = LocalDateTime.now();
-		Cita cita = new CitaTestDataBuilder()
+		CitaDto cita = new CitaTestDataBuilder()
 				.conFechaInicio(fechaAhora.plusHours(CANTIDAD_HORAS_MAYOR_DIA)).build();
 		// act
 		boolean citaVencida = citaService.verificarVencimientoCita(cita,fechaAhora);	
@@ -80,12 +80,12 @@ public class CitaTest {
 	public void verificarCitasCruzadasTest() {
 		// arrange
 		LocalDateTime fechaAhora = LocalDateTime.now();
-		Cita cita1 = new CitaTestDataBuilder()
+		CitaDto cita1 = new CitaTestDataBuilder()
 				.conFechaInicio(fechaAhora)
 				.conCantidadHoras(DOS_HORAS)
 				.conFechaFin(fechaAhora.plusHours(DOS_HORAS)).build();
 		
-		Cita cita2 = new CitaTestDataBuilder()
+		CitaDto cita2 = new CitaTestDataBuilder()
 				.conFechaInicio(fechaAhora.plusHours(UNA_HORA))
 				.conCantidadHoras(DOS_HORAS)
 				.conFechaFin(fechaAhora.plusHours(UNA_HORA+DOS_HORAS)).build();	
@@ -99,12 +99,12 @@ public class CitaTest {
 	public void verificarCitasNoCruzadasTest() {
 		// arrange
 		LocalDateTime fechaAhora = LocalDateTime.now();
-		Cita cita1 = new CitaTestDataBuilder()
+		CitaDto cita1 = new CitaTestDataBuilder()
 				.conFechaInicio(fechaAhora)
 				.conCantidadHoras(DOS_HORAS)
 				.conFechaFin(fechaAhora.plusHours(DOS_HORAS)).build();
 		
-		Cita cita2 = new CitaTestDataBuilder()
+		CitaDto cita2 = new CitaTestDataBuilder()
 				.conFechaInicio(fechaAhora.plusHours(UNA_HORA + DOS_HORAS))
 				.conCantidadHoras(DOS_HORAS)
 		        .conFechaFin(fechaAhora.plusHours(UNA_HORA+DOS_HORAS+DOS_HORAS)).build();

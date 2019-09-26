@@ -12,42 +12,37 @@ public class Profesor {
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
+	public Long id;
 	
 	@Column(name = "cedula", nullable = false)
-	private String cedula;
+	public String cedula;
 	
 	@Column(name = "nombre", nullable = false)
-	private String nombre;
+	public String nombre;
 	
 	@Column(name = "apellido", nullable = false)
-	private String apellido;
+	public String apellido;
 	
 	@Column(name = "edad", nullable = true)
-	private int edad;	
+	public int edad;	
 	
 	@Column(name = "direccion", nullable = true)
-	private String direccion;
+	public String direccion;
 	
 	
 	public Profesor() {}
-		
-	public Profesor(long id, String cedula, String nombre, String apellido, int edad, String direccion) {
+	
+	public Profesor(Long id) {
 		super();
 		this.id = id;
-		this.cedula = cedula;
-		this.nombre = nombre;
-		this.apellido = apellido;
-		this.edad = edad;
-		this.direccion = direccion;
 	}
-	
 
-	public long getId() {
+
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

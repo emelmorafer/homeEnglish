@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ceiba.homeenglish.service.ProfesorService;
+import com.ceiba.homeenglish.builder.ProfesorBuilder;
 import com.ceiba.homeenglish.dao.ProfesorDao;
 import com.ceiba.homeenglish.domain.Profesor;
+import com.ceiba.homeenglish.dto.ProfesorDto;
 
 @Service("profesorService")
 public class ProfesorServiceImpl implements ProfesorService{
@@ -15,22 +17,18 @@ public class ProfesorServiceImpl implements ProfesorService{
 	@Autowired
     ProfesorDao profesorDao;
 	
-	public Profesor guardarProfesor(Profesor profesor) {		
-		profesorDao.save(profesor);		
-		return profesor;
+	public ProfesorDto guardarProfesor(ProfesorDto profesorDto) {		
+		Profesor profesor = ProfesorBuilder.convertirAEntity(profesorDto);
+		profesorDao.save(profesor);
+		return ProfesorBuilder.convertirADto(profesor);
 	}
 
-    public Profesor actualizarProfesor(Profesor profesor) {
-    	profesorDao.save(profesor);		
-		return profesor;
+    public ProfesorDto obtenerProfesorPorId(long id) {
+    	return profesorDao.profesorDtoObtenerPorId(id); 
     }
 
-    public Profesor obtenerProfesorPorId(long id) {
-    	return profesorDao.findById(id).get();
-    }
-
-    public List<Profesor> obtenerListadoProfesores(){
-    	return (List<Profesor>) profesorDao.findAll();
+    public List<ProfesorDto> obtenerListadoProfesores(){
+    	return profesorDao.profesorDtoObtenerTodos();
     }
 
 }

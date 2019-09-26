@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 
 public class CitaDto {
 	
-	private long id;
+	private Long id;
 	private long idCliente;
 	private long idProfesor;
 	private String estadoCita;
@@ -15,8 +15,11 @@ public class CitaDto {
 	private String direccion;
 	private String nota;
 	
-
-	public CitaDto(long id, long idCliente, long idProfesor, String estadoCita, LocalDateTime fechaInicio,
+	
+	public CitaDto() {
+	}
+	
+	public CitaDto(Long id, long idCliente, long idProfesor, String estadoCita, LocalDateTime fechaInicio,
 			LocalDateTime fechaFin, int cantidadHoras, double precio, String direccion, String nota) {
 		super();
 		this.id = id;
@@ -30,13 +33,12 @@ public class CitaDto {
 		this.direccion = direccion;
 		this.nota = nota;
 	}
-	
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -71,7 +73,7 @@ public class CitaDto {
 	public void setFechaInicio(LocalDateTime fechaInicio) {
 		this.fechaInicio = fechaInicio;
 	}
-	
+
 	public LocalDateTime getFechaFin() {
 		return fechaFin;
 	}
@@ -87,7 +89,7 @@ public class CitaDto {
 	public void setCantidadHoras(int cantidadHoras) {
 		this.cantidadHoras = cantidadHoras;
 	}
-		
+
 	public double getPrecio() {
 		return precio;
 	}
@@ -112,4 +114,6 @@ public class CitaDto {
 		this.nota = nota;
 	}
 	
+	
+
 }

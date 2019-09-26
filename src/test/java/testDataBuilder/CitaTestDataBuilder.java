@@ -1,14 +1,13 @@
 package testDataBuilder;
 
 import java.time.LocalDateTime;
-
-import com.ceiba.homeenglish.domain.Cita;
-import com.ceiba.homeenglish.domain.Cliente;
-import com.ceiba.homeenglish.domain.Profesor;
+import com.ceiba.homeenglish.dto.CitaDto;
 
 public class CitaTestDataBuilder {
 
-	private static final long ID = 10L;
+	private static final long ID = 1L;
+	private static final long ID_CLIENTE = 1L;
+	private static final long ID_PROFESOR = 10L;
 	private static final String ESTADO_CITA = "PENDIENTE DE PAGO";	
 	private static final LocalDateTime FECHA_INICIO = LocalDateTime.now();	
 	private static final int CANTIDAD_HORAS = 3;
@@ -16,9 +15,9 @@ public class CitaTestDataBuilder {
 	private static final String NOTA = "prueba";
 	
 	
-	private long id;
-	private Cliente cliente;
-	private Profesor profesor;
+	private Long id;
+	private Long idCliente;
+	private Long idProfesor;
 	private String estadoCita;
 	private LocalDateTime fechaInicio;
 	private LocalDateTime fechaFin;
@@ -30,13 +29,23 @@ public class CitaTestDataBuilder {
 	
 	public CitaTestDataBuilder() {
 		this.id = ID;		
-		this.cliente = new ClienteTestDataBuilder().build();
-		this.profesor = new ProfesorTestDataBuilder().build();
+		this.idCliente = ID_CLIENTE;
+		this.idProfesor = ID_PROFESOR;
 		this.estadoCita = ESTADO_CITA;
 		this.fechaInicio = FECHA_INICIO;
 		this.cantidadHoras = CANTIDAD_HORAS;
 		this.direccion = DIRECCION;
 		this.nota = NOTA;
+	}
+	
+	public CitaTestDataBuilder conId(Long id) {
+		this.id=id;
+		return this;
+	}
+	
+	public CitaTestDataBuilder conIdProfesor(Long idProfesor) {
+		this.idProfesor=idProfesor;
+		return this;
 	}
 
 	public CitaTestDataBuilder conCantidadHoras(int cantidadHoras) {
@@ -55,9 +64,14 @@ public class CitaTestDataBuilder {
 		this.fechaFin=fechaFin;
 		return this;
 	}
+	
+	public CitaTestDataBuilder conNota(String nota) {
+		this.nota=nota;
+		return this;
+	}
 		
-	public Cita build() {
-		return new Cita(this.id,this.cliente,this.profesor,this.estadoCita,this.fechaInicio,
+	public CitaDto build() {
+		return new CitaDto(this.id,this.idCliente,this.idProfesor,this.estadoCita,this.fechaInicio,
 				this.fechaFin,this.cantidadHoras,this.precio,this.direccion,this.nota);
 	}
 

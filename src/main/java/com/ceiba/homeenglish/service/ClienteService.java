@@ -1,17 +1,14 @@
 package com.ceiba.homeenglish.service;
 
 import java.util.List;
-
-import com.ceiba.homeenglish.domain.Cliente;
+import com.ceiba.homeenglish.dto.ClienteDto;
 
 public interface ClienteService {
 			
-	public Cliente guardarCliente(Cliente cliente);
+	public ClienteDto guardarCliente(ClienteDto cliente);
 	
-	public Cliente actualizarCliente(Cliente cliente);
+	public ClienteDto obtenerClientePorId(long id);
 	
-	public Cliente obtenerClientePorId(long id);
-	
-	public List<Cliente> obtenerListadoClientes();
+	public List<ClienteDto> obtenerListadoClientes(); 
 	
 }

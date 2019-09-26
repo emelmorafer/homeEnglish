@@ -1,62 +1,78 @@
 package com.ceiba.homeEnglish.integracion;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
 
-import com.ceiba.homeenglish.controller.ClienteRestController;
-import com.ceiba.homeenglish.domain.Cliente;
-import com.ceiba.homeenglish.service.ClienteService;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import junit.framework.Assert;
+import com.ceiba.homeenglish.dto.ClienteDto;
 import testDataBuilder.ClienteTestDataBuilder;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(ClienteRestController.class)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class ClienteTest {
 
-	private static final long ID_CLIENTE_PRUEBA = 1L;
+	@LocalServerPort
+	private int port;
 
-	@Autowired
-	private ObjectMapper objectMapper;
+	TestRestTemplate restTemplate = new TestRestTemplate();
+	HttpHeaders headers = new HttpHeaders();
 
-	@Autowired
-	private MockMvc mocMvc;
-	
-	@Autowired
-	private ClienteService clienteServiceReal;
+	private static final String NOMBRE_CLIENTE_CREACION = "Emel";
+	private static final Long ID_CLIENTE_CREADO = 1L;
 
-	@MockBean
-	private ClienteService clienteService;
-
-	@Before
-	public void setUp() {
+	private String crearURL(String uri) {
+		return "http://localhost:" + port + uri;
 	}
-
+	
 	@Test
-	public void obtenerClientePorIdTest() throws Exception {
-
+	public void guardarClienteTest() {
+		// arrange		
+		ClienteDto request = new ClienteTestDataBuilder().conId(null).conNombre(NOMBRE_CLIENTE_CREACION).build();
+		HttpEntity<ClienteDto> entity = new HttpEntity<>(request, headers);
+		// act
+		ResponseEntity<ClienteDto> response = restTemplate.exchange(
+				crearURL("/api/guardarCliente"), HttpMethod.POST, entity, ClienteDto.class);
+		ClienteDto cliente = response.getBody();
+		// assert
+		assertEquals(NOMBRE_CLIENTE_CREACION,cliente.getNombre());
+	}
+		
+	@Test
+	public void getClienteByIdTest() {
 		// arrange
-
-		// act - assert
-		mocMvc.perform(get("/api/getClienteById").param("id",String.valueOf(ID_CLIENTE_PRUEBA))).andDo(print())
-				.andExpect(status().isOk()).andDo(print()).andExpect(jsonPath("$[0].id").value(ID_CLIENTE_PRUEBA));
-
+		HttpEntity<ClienteDto> entity = new HttpEntity<>(headers);
+		// act
+		ResponseEntity<ClienteDto> response = restTemplate.exchange(
+				crearURL("/api/getClienteById?id=" + ID_CLIENTE_CREADO), 
+				HttpMethod.GET, entity, ClienteDto.class);
+		ClienteDto cliente = response.getBody();
+		// assert
+		assertEquals(ID_CLIENTE_CREADO, cliente.getId());
 	}
 	
-
-
+	@Test
+	public void getListClienteTest() {
+		// arrange
+		HttpEntity<ClienteDto[]> entity = new HttpEntity<>(headers);
+		// act
+		ResponseEntity<ClienteDto[]> response = restTemplate.exchange(
+				crearURL("/api/getListCliente"), 
+				HttpMethod.GET, entity, ClienteDto[].class);
+		ClienteDto[] arrayCliente = response.getBody();
+		// assert
+		assertTrue(arrayCliente.length>0);
+	}
+	
+	
 
 }

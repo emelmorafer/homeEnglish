@@ -2,15 +2,17 @@ package com.ceiba.homeenglish.dto;
 
 public class ClienteDto {
 	
-	private long id;
+	private Long id;
 	private String cedula;
 	private String nombre;
 	private int edad;
 	private String apellido;
 	private String direccion;
-		
 	
-	public ClienteDto(long id, String cedula, String nombre, int edad, String apellido, String direccion) {
+	public ClienteDto() {
+	}
+	
+	public ClienteDto(Long id, String cedula, String nombre, int edad, String apellido, String direccion) {
 		this.id = id;
 		this.cedula = cedula;
 		this.nombre = nombre;
@@ -20,11 +22,11 @@ public class ClienteDto {
 	}
 
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

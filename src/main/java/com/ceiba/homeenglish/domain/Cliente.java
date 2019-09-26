@@ -12,43 +12,37 @@ public class Cliente {
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
+	public Long id;
 	
 	@Column(name = "cedula", nullable = false)
-	private String cedula;
+	public String cedula;
 	
 	@Column(name = "nombre", nullable = false)
-	private String nombre;
+	public String nombre;
 	
 	@Column(name = "apellido", nullable = false)
-	private String apellido;
+	public String apellido;
 	
 	@Column(name = "edad", nullable = true)
-	private int edad;
+	public int edad;
 	
 	@Column(name = "direccion", nullable = true)
-	private String direccion;
+	public String direccion;
 	
 	
 	public Cliente() {}
 	
-	public Cliente(long id, String cedula, String nombre, int edad, String apellido, String direccion) {
+	public Cliente(Long id) {
 		super();
 		this.id = id;
-		this.cedula = cedula;
-		this.nombre = nombre;
-		this.edad = edad;
-		this.apellido = apellido;
-		this.direccion = direccion;
 	}
-	
-	
 
-	public long getId() {
+
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
