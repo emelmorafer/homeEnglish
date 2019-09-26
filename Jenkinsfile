@@ -35,28 +35,20 @@ pipeline{
 						]
 					]
 				)
-				sh 'gradle clean'
+				sh '​gradle​ --b ​./homeEnglish/build.gradle clean compileJava​'
 			}
 		}
 			
-		stage('Compile') {
+		stage('Compile & Unit Tests') {
 			steps{
-				echo "------------>Compile<------------"
+				echo "------------>Unit Tests<------------"
 				sh 'gradle --b ./build.gradle compileJava'
-			}
-		}
-		
-		stage('Unit Tests') {
-			steps{
-				echo "------------>Unit tests<------------"
-				sh 'gradle test'
-				junit '**/build/test-results/test/*.xml' //aggregate test results - JUnit
 			}
 		}
 		
 		stage('Static Code Analysis') {
 			steps{
-				echo "------------>Sonar<------------"
+				echo "------------>Análisis de código estático con Sonar<------------"
 				withSonarQubeEnv('Sonar') {
 					sh "${tool name: 'SonarScanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'}/bin/sonar-scanner"
 				}
@@ -66,7 +58,7 @@ pipeline{
 		stage('Build') {
 			steps{
 				echo "------------>Build<------------"			
-				//Construir sin tarea test que se ejecut� previamente
+				//Construir sin tarea test que se ejecutó previamente
 				sh 'gradle --b ./build.gradle build -x test'
 			}
 		}
@@ -76,8 +68,8 @@ pipeline{
 	post{
 	
 		success {
-			echo "This will run only if successful"
-			//send notifications about a Pipeline to an email
+			echo "This will run only if successful"	
+			//send notifications about a Pipeline to an email		
 			junit 'build/test-results/test/*.xml'
 			mail (to: 'emel.mora@ceiba.com.co',
 			     subject: "Success Pipeline: ${currentBuild.fullDisplayName}",

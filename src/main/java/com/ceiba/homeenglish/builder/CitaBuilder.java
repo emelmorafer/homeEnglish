@@ -30,7 +30,7 @@ public class CitaBuilder {
 	}
 	
 	public static Cita convertirAEntity(CitaDto citaDto) {	
-				
+		
 		Cliente cliente = new Cliente(citaDto.getIdCliente());
 		Profesor profesor = new Profesor(citaDto.getIdProfesor());
 		
