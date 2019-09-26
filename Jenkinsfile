@@ -34,16 +34,23 @@ pipeline{
 							]
 						]
 					]
-				)		
+				)
+				sh 'gradle clean'		
+			}
+		}				
+			
+		stage('Compile') {
+			steps{
+				echo "------------>Compile<------------"
+				sh 'gradle --b ./build.gradle compileJava'
 			}
 		}
 		
-		sh '​gradle​ --b ​./homeEnglish/build.gradle clean compileJava​'
-			
-		stage('Compile & Unit Tests') {
+		stage('Unit Tests') {
 			steps{
-				echo "------------>Unit Tests<------------"
-				sh 'gradle --b ./build.gradle compileJava'
+				echo "------------>Unit tests<------------"
+				sh 'gradle test'
+				junit '**/build/test-results/test/*.xml' //aggregate test results - JUnit
 			}
 		}
 		
