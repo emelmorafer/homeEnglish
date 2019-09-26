@@ -34,10 +34,11 @@ pipeline{
 							]
 						]
 					]
-				)
-				sh '​gradle​ --b ​./homeEnglish/build.gradle clean compileJava​'
+				)		
 			}
 		}
+		
+		sh '​gradle​ --b ​./homeEnglish/build.gradle clean compileJava​'
 			
 		stage('Compile & Unit Tests') {
 			steps{
