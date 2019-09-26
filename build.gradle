@@ -29,8 +29,7 @@ dependencies {
 	compile("org.springframework.boot:spring-boot-starter")
 
 	implementation 'org.modelmapper:modelmapper:2.3.0'
-	implementation 'org.springframework.boot:spring-boot-starter'
-	implementation 'org.springframework.web.bind.annotation'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
 	
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 	    
