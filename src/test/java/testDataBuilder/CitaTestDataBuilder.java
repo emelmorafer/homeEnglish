@@ -5,10 +5,10 @@ import com.ceiba.homeenglish.dto.CitaDto;
 
 public class CitaTestDataBuilder {
 
-	private static final long ID = 1L;
-	private static final long ID_CLIENTE = 1L;
+	private static final long ID = 100L;
+	private static final long ID_CLIENTE = 100L;
 	private static final String NOMBRE_CLIENTE = "nombreCliente";
-	private static final long ID_PROFESOR = 10L;
+	private static final long ID_PROFESOR = 100L;
 	private static final String NOMBRE_PROFESOR = "nombreProfesor";
 	private static final String ESTADO_CITA = "PENDIENTE DE PAGO";	
 	private static final LocalDateTime FECHA_INICIO = LocalDateTime.now();	

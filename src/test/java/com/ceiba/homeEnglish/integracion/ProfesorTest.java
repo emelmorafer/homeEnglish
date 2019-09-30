@@ -28,7 +28,7 @@ public class ProfesorTest {
 	HttpHeaders headers = new HttpHeaders();
 
 	private static final String NOMBRE_PROFESOR_CREACION = "Santiago";
-	private static final Long ID_PROFESOR_CREADO = 1L;
+	private static final Long ID_PROFESOR_CREADO = 100L;
 
 	private String crearURL(String uri) {
 		return "http://localhost:" + port + uri;

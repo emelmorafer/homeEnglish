@@ -30,8 +30,8 @@ public class CitaTest {
 	TestRestTemplate restTemplate = new TestRestTemplate();
 	HttpHeaders headers = new HttpHeaders();
 
-	private static final Long ID_CITA_CREADA = 1L;
-	private static final Long ID_PROFESOR_CREADO = 10L;
+	private static final Long ID_CITA_CREADA = 100L;
+	private static final Long ID_PROFESOR_CREADO = 100L;
 	private static final String NOTA_CREACION = "Nota de creacion";
 	private static final int DOS_HORAS = 2;
 	private static final int UNA_HORA = 1;

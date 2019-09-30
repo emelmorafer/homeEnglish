@@ -28,7 +28,7 @@ public class ClienteTest {
 	HttpHeaders headers = new HttpHeaders();
 
 	private static final String NOMBRE_CLIENTE_CREACION = "Emel";
-	private static final Long ID_CLIENTE_CREADO = 1L;
+	private static final Long ID_CLIENTE_CREADO = 100L;
 
 	private String crearURL(String uri) {
 		return "http://localhost:" + port + uri;
