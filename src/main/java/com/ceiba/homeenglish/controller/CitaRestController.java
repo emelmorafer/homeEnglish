@@ -3,6 +3,7 @@ package com.ceiba.homeenglish.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,8 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ceiba.homeenglish.dto.CitaDto;
 import com.ceiba.homeenglish.service.CitaService;
 
+@CrossOrigin(origins =  { "*"})
 @RestController
-@RequestMapping("api")
+@RequestMapping("homeEnglish")
 public class CitaRestController {
 	
 	@Autowired
@@ -48,6 +50,11 @@ public class CitaRestController {
 	@PostMapping(value = "/verificarValidesGuardadoDeCita")
     public boolean verificarValidesGuardadoDeCita(@RequestBody CitaDto cita) {		
 		return citaService.verificarValidesGuardadoDeCita(cita);
+	}
+		
+	@PostMapping(value = "/calcularPrecioCita")
+    public double calcularPrecioCita(@RequestBody CitaDto cita) {
+		return citaService.calcularPrecioCita(cita);
 	}
 
 }

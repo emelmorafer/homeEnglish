@@ -7,7 +7,9 @@ public class CitaTestDataBuilder {
 
 	private static final long ID = 1L;
 	private static final long ID_CLIENTE = 1L;
+	private static final String NOMBRE_CLIENTE = "nombreCliente";
 	private static final long ID_PROFESOR = 10L;
+	private static final String NOMBRE_PROFESOR = "nombreProfesor";
 	private static final String ESTADO_CITA = "PENDIENTE DE PAGO";	
 	private static final LocalDateTime FECHA_INICIO = LocalDateTime.now();	
 	private static final int CANTIDAD_HORAS = 3;
@@ -17,7 +19,9 @@ public class CitaTestDataBuilder {
 	
 	private Long id;
 	private Long idCliente;
+	private String nombreCompletoCliente;
 	private Long idProfesor;
+	private String nombreCompletoProfesor;
 	private String estadoCita;
 	private LocalDateTime fechaInicio;
 	private LocalDateTime fechaFin;
@@ -30,7 +34,9 @@ public class CitaTestDataBuilder {
 	public CitaTestDataBuilder() {
 		this.id = ID;		
 		this.idCliente = ID_CLIENTE;
+		this.nombreCompletoCliente = NOMBRE_CLIENTE;
 		this.idProfesor = ID_PROFESOR;
+		this.nombreCompletoProfesor = NOMBRE_PROFESOR;
 		this.estadoCita = ESTADO_CITA;
 		this.fechaInicio = FECHA_INICIO;
 		this.cantidadHoras = CANTIDAD_HORAS;
@@ -71,7 +77,8 @@ public class CitaTestDataBuilder {
 	}
 		
 	public CitaDto build() {
-		return new CitaDto(this.id,this.idCliente,this.idProfesor,this.estadoCita,this.fechaInicio,
+		return new CitaDto(this.id,this.idCliente,this.nombreCompletoCliente, 
+				this.idProfesor,this.nombreCompletoProfesor, this.estadoCita,this.fechaInicio,
 				this.fechaFin,this.cantidadHoras,this.precio,this.direccion,this.nota);
 	}
 

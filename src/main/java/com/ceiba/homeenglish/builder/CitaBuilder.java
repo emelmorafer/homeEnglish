@@ -15,8 +15,10 @@ public class CitaBuilder {
 		
 		if(cita != null) {
 			citaDto = new CitaDto(cita.getId(), 
-					cita.getCliente().getId(), 
+					cita.getCliente().getId(),
+					cita.getCliente().getNombre() + " " + cita.getCliente().apellido,
 					cita.getProfesor().getId(), 
+					cita.getProfesor().getNombre() + " " + cita.getProfesor().apellido,
 					cita.getEstadoCita(), 
 					cita.getFechaInicio(), 
 					cita.getFechaFin(), 

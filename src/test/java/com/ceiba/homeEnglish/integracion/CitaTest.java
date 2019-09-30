@@ -35,6 +35,7 @@ public class CitaTest {
 	private static final String NOTA_CREACION = "Nota de creacion";
 	private static final int DOS_HORAS = 2;
 	private static final int UNA_HORA = 1;
+	private static final Double PRECIO_DOS_HORAS = 50000D;
 
 	private String crearURL(String uri) {
 		return "http://localhost:" + port + uri;
@@ -48,7 +49,7 @@ public class CitaTest {
 		HttpEntity<CitaDto> entity = new HttpEntity<>(request, headers);
 		// act
 		ResponseEntity<CitaDto> response = restTemplate.exchange(
-				crearURL("/api/guardarCita"), HttpMethod.POST, entity, CitaDto.class);
+				crearURL("/homeEnglish/guardarCita"), HttpMethod.POST, entity, CitaDto.class);
 		CitaDto cita = response.getBody();
 		// assert
 		assertEquals(NOTA_CREACION,cita.getNota());
@@ -60,7 +61,7 @@ public class CitaTest {
 		HttpEntity<CitaDto> entity = new HttpEntity<>(headers);
 		// act
 		ResponseEntity<CitaDto> response = restTemplate.exchange(
-				crearURL("/api/getCitaById?id=" + ID_CITA_CREADA), 
+				crearURL("/homeEnglish/getCitaById?id=" + ID_CITA_CREADA), 
 				HttpMethod.GET, entity, CitaDto.class);
 		CitaDto cita = response.getBody();
 		// assert
@@ -74,12 +75,12 @@ public class CitaTest {
 		HttpEntity<CitaDto> entity2 = new HttpEntity<>(headers);
 		// act
 		ResponseEntity<Boolean> response = restTemplate.exchange(
-				crearURL("/api/aprobarCitaPorId?id=" + ID_CITA_CREADA), 
+				crearURL("/homeEnglish/aprobarCitaPorId?id=" + ID_CITA_CREADA), 
 				HttpMethod.GET, entity, Boolean.class);
 		Boolean respuesta = response.getBody();
 		
 		ResponseEntity<CitaDto> response2 = restTemplate.exchange(
-				crearURL("/api/getCitaById?id=" + ID_CITA_CREADA), 
+				crearURL("/homeEnglish/getCitaById?id=" + ID_CITA_CREADA), 
 				HttpMethod.GET, entity2, CitaDto.class);
 		CitaDto cita = response2.getBody();
 		// assert
@@ -93,12 +94,12 @@ public class CitaTest {
 		HttpEntity<CitaDto> entity2 = new HttpEntity<>(headers);
 		// act
 		ResponseEntity<Boolean> response = restTemplate.exchange(
-				crearURL("/api/rechazarCitaPorId?id=" + ID_CITA_CREADA), 
+				crearURL("/homeEnglish/rechazarCitaPorId?id=" + ID_CITA_CREADA), 
 				HttpMethod.GET, entity, Boolean.class);
 		Boolean respuesta = response.getBody();
 		
 		ResponseEntity<CitaDto> response2 = restTemplate.exchange(
-				crearURL("/api/getCitaById?id=" + ID_CITA_CREADA), 
+				crearURL("/homeEnglish/getCitaById?id=" + ID_CITA_CREADA), 
 				HttpMethod.GET, entity2, CitaDto.class);
 		CitaDto cita = response2.getBody();
 		// assert
@@ -111,7 +112,7 @@ public class CitaTest {
 		HttpEntity<CitaDto[]> entity = new HttpEntity<>(headers);
 		// act
 		ResponseEntity<CitaDto[]> response = restTemplate.exchange(
-				crearURL("/api/getListCita"), 
+				crearURL("/homeEnglish/getListCita"), 
 				HttpMethod.GET, entity, CitaDto[].class);
 		CitaDto[] arrayCita = response.getBody();
 		// assert
@@ -137,10 +138,10 @@ public class CitaTest {
 		HttpEntity<CitaDto> entity1 = new HttpEntity<>(request1, headers);
 		HttpEntity<CitaDto> entity2 = new HttpEntity<>(request2, headers);
 		
-		restTemplate.exchange(crearURL("/api/guardarCita"), HttpMethod.POST, entity1, CitaDto.class);
+		restTemplate.exchange(crearURL("/homeEnglish/guardarCita"), HttpMethod.POST, entity1, CitaDto.class);
 		// act
 		ResponseEntity<Boolean> response2 = restTemplate.exchange(
-				crearURL("/api/verificarValidesGuardadoDeCita"), HttpMethod.POST, entity2, Boolean.class);
+				crearURL("/homeEnglish/verificarValidesGuardadoDeCita"), HttpMethod.POST, entity2, Boolean.class);
 		
 		boolean citaValida = response2.getBody();
 		
@@ -167,15 +168,29 @@ public class CitaTest {
 		HttpEntity<CitaDto> entity1 = new HttpEntity<>(request1, headers);
 		HttpEntity<CitaDto> entity2 = new HttpEntity<>(request2, headers);
 		
-		restTemplate.exchange(crearURL("/api/guardarCita"), HttpMethod.POST, entity1, CitaDto.class);
+		restTemplate.exchange(crearURL("/homeEnglish/guardarCita"), HttpMethod.POST, entity1, CitaDto.class);
 		// act
 		ResponseEntity<Boolean> response2 = restTemplate.exchange(
-				crearURL("/api/verificarValidesGuardadoDeCita"), HttpMethod.POST, entity2, Boolean.class);
+				crearURL("/homeEnglish/verificarValidesGuardadoDeCita"), HttpMethod.POST, entity2, Boolean.class);
 		
 		boolean citaValida = response2.getBody();
 		
 		// assert
 		assertFalse(citaValida);
+	}
+	
+	
+	@Test
+	public void calcularPrecioCitaTest() {
+		// arrange
+		CitaDto request = new CitaTestDataBuilder().conCantidadHoras(DOS_HORAS).build();
+		HttpEntity<CitaDto> entity = new HttpEntity<>(request, headers);
+		// act
+		ResponseEntity<Double> response = restTemplate.exchange(crearURL("/homeEnglish/calcularPrecioCita"), 
+				HttpMethod.POST, entity, Double.class);
+		Double precio = response.getBody();
+		// assert
+		assertEquals(PRECIO_DOS_HORAS,precio);
 	}
 
 	

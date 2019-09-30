@@ -6,7 +6,9 @@ public class CitaDto {
 	
 	private Long id;
 	private long idCliente;
+	private String nombreCompletoCliente;
 	private long idProfesor;
+	private String nombreCompletoProfesor;
 	private String estadoCita;
 	private LocalDateTime fechaInicio;
 	private LocalDateTime fechaFin;
@@ -19,12 +21,16 @@ public class CitaDto {
 	public CitaDto() {
 	}
 	
-	public CitaDto(Long id, long idCliente, long idProfesor, String estadoCita, LocalDateTime fechaInicio,
-			LocalDateTime fechaFin, int cantidadHoras, double precio, String direccion, String nota) {
+
+	public CitaDto(Long id, long idCliente, String nombreCompletoCliente, long idProfesor,
+			String nombreCompletoProfesor, String estadoCita, LocalDateTime fechaInicio, LocalDateTime fechaFin,
+			int cantidadHoras, double precio, String direccion, String nota) {
 		super();
 		this.id = id;
 		this.idCliente = idCliente;
+		this.nombreCompletoCliente = nombreCompletoCliente;
 		this.idProfesor = idProfesor;
+		this.nombreCompletoProfesor = nombreCompletoProfesor;
 		this.estadoCita = estadoCita;
 		this.fechaInicio = fechaInicio;
 		this.fechaFin = fechaFin;
@@ -33,6 +39,7 @@ public class CitaDto {
 		this.direccion = direccion;
 		this.nota = nota;
 	}
+
 
 	public Long getId() {
 		return id;
@@ -49,6 +56,14 @@ public class CitaDto {
 	public void setIdCliente(long idCliente) {
 		this.idCliente = idCliente;
 	}
+	
+	public String getNombreCompletoCliente() {
+		return nombreCompletoCliente;
+	}
+
+	public void setNombreCompletoCliente(String nombreCompletoCliente) {
+		this.nombreCompletoCliente = nombreCompletoCliente;
+	}
 
 	public long getIdProfesor() {
 		return idProfesor;
@@ -56,6 +71,14 @@ public class CitaDto {
 
 	public void setIdProfesor(long idProfesor) {
 		this.idProfesor = idProfesor;
+	}
+	
+	public String getNombreCompletoProfesor() {
+		return nombreCompletoProfesor;
+	}
+
+	public void setNombreCompletoProfesor(String nombreCompletoProfesor) {
+		this.nombreCompletoProfesor = nombreCompletoProfesor;
 	}
 
 	public String getEstadoCita() {

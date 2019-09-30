@@ -42,7 +42,7 @@ public class ProfesorTest {
 		HttpEntity<ProfesorDto> entity = new HttpEntity<>(request, headers);
 		// act
 		ResponseEntity<ProfesorDto> response = restTemplate.exchange(
-				crearURL("/api/guardarProfesor"), HttpMethod.POST, entity, ProfesorDto.class);
+				crearURL("/homeEnglish/guardarProfesor"), HttpMethod.POST, entity, ProfesorDto.class);
 		ProfesorDto profesor = response.getBody();
 		// assert
 		assertEquals(NOMBRE_PROFESOR_CREACION,profesor.getNombre());
@@ -54,7 +54,7 @@ public class ProfesorTest {
 		HttpEntity<ProfesorDto> entity = new HttpEntity<>(headers);
 		// act
 		ResponseEntity<ProfesorDto> response = restTemplate.exchange(
-				crearURL("/api/getProfesorById?id=" + ID_PROFESOR_CREADO), 
+				crearURL("/homeEnglish/getProfesorById?id=" + ID_PROFESOR_CREADO), 
 				HttpMethod.GET, entity, ProfesorDto.class);
 		ProfesorDto profesor = response.getBody();
 		// assert
@@ -67,7 +67,7 @@ public class ProfesorTest {
 		HttpEntity<ProfesorDto[]> entity = new HttpEntity<>(headers);
 		// act
 		ResponseEntity<ProfesorDto[]> response = restTemplate.exchange(
-				crearURL("/api/getListProfesor"), 
+				crearURL("/homeEnglish/getListProfesor"), 
 				HttpMethod.GET, entity, ProfesorDto[].class);
 		ProfesorDto[] arrayProfesor = response.getBody();
 		// assert
