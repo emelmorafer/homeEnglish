@@ -32,6 +32,7 @@ public class CitaTest {
 
 	private static final Long ID_CITA_CREADA = 100L;
 	private static final Long ID_PROFESOR_CREADO = 100L;
+	private static final Long ID_CLIENTE_CREADO = 100L;
 	private static final String NOTA_CREACION = "Nota de creacion";
 	private static final int DOS_HORAS = 2;
 	private static final int UNA_HORA = 1;
@@ -118,6 +119,32 @@ public class CitaTest {
 		// assert
 		assertTrue(arrayCita.length>0);
 	}
+	
+	@Test
+	public void getListCitasAprobadasByIdClienteTest() {
+		// arrange
+		HttpEntity<CitaDto[]> entity = new HttpEntity<>(headers);
+		// act
+		ResponseEntity<CitaDto[]> response = restTemplate.exchange(
+				crearURL("/homeEnglish/getListCitasAprobadasByIdCliente?idCliente=" + ID_CLIENTE_CREADO), 
+				HttpMethod.GET, entity, CitaDto[].class);
+		CitaDto[] arrayCita = response.getBody();
+		// assert
+		assertTrue(arrayCita.length>0);
+	}
+	
+	@Test
+	public void getListCitasAprobadasByIdProfesorTest() {
+		// arrange
+		HttpEntity<CitaDto[]> entity = new HttpEntity<>(headers);
+		// act
+		ResponseEntity<CitaDto[]> response = restTemplate.exchange(
+				crearURL("/homeEnglish/getListCitasAprobadasByIdProfesor?idProfesor=" + ID_PROFESOR_CREADO), 
+				HttpMethod.GET, entity, CitaDto[].class);
+		CitaDto[] arrayCita = response.getBody();
+		// assert
+		assertTrue(arrayCita.length>0);
+	}	
 	
 	@Test
 	public void verificarValidesGuardadoDeCitaCorrectaTest() {

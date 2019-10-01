@@ -23,9 +23,9 @@ public interface CitaService {
 	
 	public List<CitaDto> obtenerListadoCitas();
 	
-	public List<CitaDto> obtenerListadoCitasPorProfesor(long idProfesor);
+	public List<CitaDto> obtenerListadoCitasAprobadasPorProfesor(long idProfesor);
 	
-	public List<CitaDto> obtenerListadoCitasPorCliente(long idCliente);
+	public List<CitaDto> obtenerListadoCitasAprobadasPorCliente(long idCliente);
 	
 	boolean verificarCruce2Citas(CitaDto citaPorGuardar, CitaDto citaGuardada);
 	

@@ -101,12 +101,12 @@ public class CitaServiceImpl implements CitaService{
     }
     
     
-    public List<CitaDto> obtenerListadoCitasPorProfesor(long idProfesor){
+    public List<CitaDto> obtenerListadoCitasAprobadasPorProfesor(long idProfesor){
     	return citaDao.obtenerCitasAprobadasPorIdProfesor(idProfesor);
     }
     
 	
-	public List<CitaDto> obtenerListadoCitasPorCliente(long idCliente){
+	public List<CitaDto> obtenerListadoCitasAprobadasPorCliente(long idCliente){
 		return citaDao.obtenerCitasAprobadasPorIdCliente(idCliente);
 	}
 	

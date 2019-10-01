@@ -47,6 +47,16 @@ public class CitaRestController {
 		return citaService.obtenerListadoCitas();
 	}
 	
+	@GetMapping(value = "/getListCitasAprobadasByIdCliente")
+    public List<CitaDto> getListCitasAprobadasByIdCliente(@RequestParam(value="idCliente") long idCliente) {		
+		return citaService.obtenerListadoCitasAprobadasPorCliente(idCliente);
+	}
+	
+	@GetMapping(value = "/getListCitasAprobadasByIdProfesor")
+    public List<CitaDto> getListCitasAprobadasByIdProfesor(@RequestParam(value="idProfesor") long idProfesor) {		
+		return citaService.obtenerListadoCitasAprobadasPorProfesor(idProfesor);
+	}
+	
 	@PostMapping(value = "/verificarValidesGuardadoDeCita")
     public boolean verificarValidesGuardadoDeCita(@RequestBody CitaDto cita) {		
 		return citaService.verificarValidesGuardadoDeCita(cita);
