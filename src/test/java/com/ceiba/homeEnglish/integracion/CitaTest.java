@@ -219,6 +219,20 @@ public class CitaTest {
 		// assert
 		assertEquals(PRECIO_DOS_HORAS,precio);
 	}
+	
+	
+	@Test
+	public void rechazarCitasVencidasTest() {
+		// arrange
+		HttpEntity<Boolean> entity = new HttpEntity<>(headers);
+		// act
+		ResponseEntity<Boolean> response = restTemplate.exchange(
+				crearURL("/homeEnglish/rechazarCitasVencidas"), 
+				HttpMethod.GET, entity, Boolean.class);
+		Boolean respuesta = response.getBody();
+		// assert
+		assertTrue(respuesta);
+	}
 
 	
 	

@@ -31,6 +31,6 @@ public interface CitaService {
 	
 	public boolean verificarValidesGuardadoDeCita(CitaDto cita);
 	
-	public void rechazarCitasVencidas();
+	public boolean rechazarCitasVencidas();
 		
 }

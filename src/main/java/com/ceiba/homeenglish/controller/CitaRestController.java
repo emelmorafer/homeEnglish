@@ -66,5 +66,10 @@ public class CitaRestController {
     public double calcularPrecioCita(@RequestBody CitaDto cita) {
 		return citaService.calcularPrecioCita(cita);
 	}
+	
+	@GetMapping(value = "/rechazarCitasVencidas")
+    public boolean rechazarCitasVencidas() {		
+		return citaService.rechazarCitasVencidas();
+	}
 
 }

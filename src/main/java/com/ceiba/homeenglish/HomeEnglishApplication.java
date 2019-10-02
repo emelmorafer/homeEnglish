@@ -21,6 +21,8 @@ import com.ceiba.homeenglish.job.JobCita;
 @EnableScheduling
 public class HomeEnglishApplication {
 	
+	private static final String URL_SERVICIO = "http://localhost:8080/homeEnglish/rechazarCitasVencidas";
+		
 	private static final Logger LOGGER = LoggerFactory.getLogger(HomeEnglishApplication.class);
 	
 	public static void main(String[] args) {
@@ -29,15 +31,16 @@ public class HomeEnglishApplication {
 	
 	
 	@Bean
-	boolean programarTareaHuella(){
+	boolean programarTarea(){
 		try {				
 			Scheduler scheduler = StdSchedulerFactory.getDefaultScheduler();
 			
-			String cronExpression = "0 0/1 * 1/1 * ? *";  //Cada Minuto
-			//String cronExpression = "0 0 0/1 1/1 * ? *";  //Cada Hora
+			//String cronExpression = "0 0/1 * 1/1 * ? *";  //Cada Minuto
+			String cronExpression = "0 0 0/1 1/1 * ? *";  //Cada Hora
 	        				    
 		    JobDetail job = JobBuilder.newJob(JobCita.class)  
-		        .withIdentity("jobCita","groupCita").build();
+		        .withIdentity("jobCita","groupCita")
+		        .usingJobData("urlServicio",URL_SERVICIO).build();
 		        
 		    
 		    CronTrigger trigger = TriggerBuilder.newTrigger()
