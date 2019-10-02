@@ -21,11 +21,6 @@ repositories {
 }
 
 
-test {
-    useJUnitPlatform()
-}
-
-
 dependencies {
     compile 'log4j:log4j:1.2.17'
 	compile 'com.h2database:h2:1.4.194'	
