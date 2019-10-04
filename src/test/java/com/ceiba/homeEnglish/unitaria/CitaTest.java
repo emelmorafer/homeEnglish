@@ -1,4 +1,4 @@
-package com.ceiba.homeEnglish.unitaria;
+package com.ceiba.homeenglish.unitaria;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -12,7 +12,7 @@ import com.ceiba.homeenglish.dto.CitaDto;
 import com.ceiba.homeenglish.service.CitaService;
 import com.ceiba.homeenglish.service.impl.CitaServiceImpl;
 
-import testDataBuilder.CitaTestDataBuilder;
+import testdatabuilder.CitaTestDataBuilder;
 
 public class CitaTest {
 	

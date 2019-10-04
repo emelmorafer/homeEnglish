@@ -7,10 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ceiba.homeenglish.service.CitaService;
-import com.ceiba.homeenglish.builder.CitaBuilder;
-import com.ceiba.homeenglish.dao.CitaDao;
-import com.ceiba.homeenglish.domain.Cita;
 import com.ceiba.homeenglish.dto.CitaDto;
+import com.ceiba.homeenglish.repository.CitaRepository;
 
 @Service
 public class CitaServiceImpl implements CitaService{
@@ -22,7 +20,7 @@ public class CitaServiceImpl implements CitaService{
 	private static final int NUMERO_HORAS_DIA = 24;
 	
 	@Autowired
-    CitaDao citaDao;
+    CitaRepository citaRepository;
 	
 	public CitaDto guardarCita(CitaDto citaDto) {		
 		if (verificarValidesGuardadoDeCita(citaDto)) {
@@ -30,9 +28,7 @@ public class CitaServiceImpl implements CitaService{
 			citaDto.setPrecio(calcularPrecioCita(citaDto));
 			citaDto.setFechaFin(obtenerFechaFinCita(citaDto));			
 			try {
-				Cita cita = CitaBuilder.convertirAEntity(citaDto);
-				citaDao.save(cita);
-				return CitaBuilder.convertirADto(cita);
+				return citaRepository.save(citaDto);
 				
     		} catch (Exception e) {
     			return null;
@@ -52,11 +48,11 @@ public class CitaServiceImpl implements CitaService{
 	
 
     public boolean aprobarCitaPorId(long id) {    	
-    	CitaDto cita = citaDao.citaDtoObtenerPorId(id);  	
+    	CitaDto cita = citaRepository.findById(id);  	
     	if(cita != null) {
     		try {
     			cita.setEstadoCita(ESTADO_APROBACION); 
-    			citaDao.save(CitaBuilder.convertirAEntity(cita));	
+    			citaRepository.save(cita);	
     			return true;
     		} catch (Exception e) {
     			return false;
@@ -67,11 +63,11 @@ public class CitaServiceImpl implements CitaService{
     }
     
     public boolean rechazarCitaPorId(long id) {    	
-    	CitaDto cita = citaDao.citaDtoObtenerPorId(id);	
+    	CitaDto cita = citaRepository.findById(id);	
     	if(cita != null) {
     		try {
-    			cita.setEstadoCita(ESTADO_RECHAZO); 
-    			citaDao.save(CitaBuilder.convertirAEntity(cita));
+    			cita.setEstadoCita(ESTADO_RECHAZO);
+    			citaRepository.save(cita);
     			return true;
     		} catch (Exception e) {
     			return false;
@@ -92,22 +88,22 @@ public class CitaServiceImpl implements CitaService{
     
 
     public CitaDto obtenerCitaPorId(long id) {
-    	return citaDao.citaDtoObtenerPorId(id);
+    	return citaRepository.findById(id);
     }
     
 
     public List<CitaDto> obtenerListadoCitas(){
-    	return citaDao.citaDtoObtenerTodas();
+    	return citaRepository.findAll();
     }
     
     
     public List<CitaDto> obtenerListadoCitasAprobadasPorProfesor(long idProfesor){
-    	return citaDao.obtenerCitasAprobadasPorIdProfesor(idProfesor);
+    	return citaRepository.obtenerCitasAprobadasPorIdProfesor(idProfesor);
     }
     
 	
 	public List<CitaDto> obtenerListadoCitasAprobadasPorCliente(long idCliente){
-		return citaDao.obtenerCitasAprobadasPorIdCliente(idCliente);
+		return citaRepository.obtenerCitasAprobadasPorIdCliente(idCliente);
 	}
 	
 	public boolean verificarCruce2Citas(CitaDto citaPorGuardar, CitaDto citaGuardada) {	
@@ -132,7 +128,7 @@ public class CitaServiceImpl implements CitaService{
 	
 
 	public boolean verificarValidesGuardadoDeCita(CitaDto cita) {		
-		List<CitaDto> listadoCitas = citaDao.obtenerCitasNoRechazadasPorIdProfesor(cita.getIdProfesor());		
+		List<CitaDto> listadoCitas = citaRepository.obtenerCitasNoRechazadasPorIdProfesor(cita.getIdProfesor());		
 		for (CitaDto citaGuardada : listadoCitas) {			
 			if(verificarCruce2Citas(cita,citaGuardada)){
 				return false;
@@ -143,7 +139,7 @@ public class CitaServiceImpl implements CitaService{
 		
 	public boolean rechazarCitasVencidas() {				
 		try {
-			List<CitaDto> listadoCitas = citaDao.obtenerCitasPendientesDePago(LocalDateTime.now());		
+			List<CitaDto> listadoCitas = citaRepository.obtenerCitasPendientesDePago(LocalDateTime.now());		
 			for (CitaDto cita : listadoCitas) {			
 				if(verificarVencimientoCita(cita, LocalDateTime.now())) {
 					rechazarCitaPorId(cita.getId());
@@ -155,6 +151,5 @@ public class CitaServiceImpl implements CitaService{
 		} 	
 	}
 	
-	
-	
+
 }

@@ -6,29 +6,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ceiba.homeenglish.service.ClienteService;
-import com.ceiba.homeenglish.builder.ClienteBuilder;
-import com.ceiba.homeenglish.dao.ClienteDao;
-import com.ceiba.homeenglish.domain.Cliente;
 import com.ceiba.homeenglish.dto.ClienteDto;
+import com.ceiba.homeenglish.repository.ClienteRepository;
 
 @Service
 public class ClienteServiceImpl implements ClienteService{
 	
 	@Autowired
-    ClienteDao clienteDao;
+    ClienteRepository clienteRepository;
 	
-	public ClienteDto guardarCliente(ClienteDto clienteDto) {		
-		Cliente cliente = ClienteBuilder.convertirAEntity(clienteDto);
-		clienteDao.save(cliente);
-		return ClienteBuilder.convertirADto(cliente);
+	public ClienteDto guardarCliente(ClienteDto clienteDto) {	
+		return clienteRepository.save(clienteDto);
 	}
 
     public ClienteDto obtenerClientePorId(long id) {
-    	return clienteDao.clienteDtoObtenerPorId(id); 
+    	return clienteRepository.findById(id); 
     }
 
     public List<ClienteDto> obtenerListadoClientes(){
-    	return clienteDao.clienteDtoObtenerTodos();
+    	return clienteRepository.findAll();
     }
 
 }

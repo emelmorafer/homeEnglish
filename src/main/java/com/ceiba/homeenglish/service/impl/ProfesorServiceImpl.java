@@ -6,29 +6,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ceiba.homeenglish.service.ProfesorService;
-import com.ceiba.homeenglish.builder.ProfesorBuilder;
-import com.ceiba.homeenglish.dao.ProfesorDao;
-import com.ceiba.homeenglish.domain.Profesor;
 import com.ceiba.homeenglish.dto.ProfesorDto;
+import com.ceiba.homeenglish.repository.ProfesorRepository;
 
 @Service("profesorService")
 public class ProfesorServiceImpl implements ProfesorService{
 	
 	@Autowired
-    ProfesorDao profesorDao;
+    ProfesorRepository profesorRepository;
 	
-	public ProfesorDto guardarProfesor(ProfesorDto profesorDto) {		
-		Profesor profesor = ProfesorBuilder.convertirAEntity(profesorDto);
-		profesorDao.save(profesor);
-		return ProfesorBuilder.convertirADto(profesor);
+	public ProfesorDto guardarProfesor(ProfesorDto profesorDto) {	
+		return profesorRepository.save(profesorDto);
 	}
 
     public ProfesorDto obtenerProfesorPorId(long id) {
-    	return profesorDao.profesorDtoObtenerPorId(id); 
+    	return profesorRepository.findById(id); 
     }
 
     public List<ProfesorDto> obtenerListadoProfesores(){
-    	return profesorDao.profesorDtoObtenerTodos();
+    	return profesorRepository.findAll();
     }
 
 }

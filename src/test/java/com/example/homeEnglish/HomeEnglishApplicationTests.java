@@ -1,4 +1,4 @@
-package com.example.homeEnglish;
+package com.example.homeenglish;
 
 import org.springframework.boot.test.context.SpringBootTest;
 

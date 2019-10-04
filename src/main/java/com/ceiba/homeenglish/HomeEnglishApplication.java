@@ -50,6 +50,7 @@ public class HomeEnglishApplication {
 		        	
             scheduler.scheduleJob(job,trigger);	
             scheduler.start();	
+            scheduler.shutdown(Boolean.TRUE);
             LOGGER.info("\n Se programo la tarea para verificar citas vencidas \n"); 
 			return true;			
 		} catch (Exception e) {

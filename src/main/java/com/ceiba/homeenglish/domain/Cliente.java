@@ -11,7 +11,7 @@ public class Cliente {
 	
 	@Id
 	@Column(name = "id")
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Long id;
 	
 	@Column(name = "cedula", nullable = false)

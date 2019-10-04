@@ -1,4 +1,4 @@
-package com.ceiba.homeEnglish.integracion;
+package com.ceiba.homeenglish.integracion;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -18,7 +18,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.ceiba.homeenglish.dto.CitaDto;
-import testDataBuilder.CitaTestDataBuilder;
+import testdatabuilder.CitaTestDataBuilder;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
