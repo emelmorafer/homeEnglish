@@ -15,7 +15,7 @@ public class CitaServiceImpl implements CitaService{
 	
 	private static final String ESTADO_CREACION = "PENDIENTE DE PAGO";
 	private static final String ESTADO_APROBACION = "APROBADA";
-	private static final String ESTADO_RECHAZO = "REACHAZADA";
+	private static final String ESTADO_RECHAZO = "RECHAZADA";
 	private static final Double PRECIO_HORA_CITA = 25000D;
 	private static final int NUMERO_HORAS_DIA = 24;
 	

@@ -39,6 +39,8 @@ public class CitaTest {
 	private static final int DOS_HORAS = 2;
 	private static final int UNA_HORA = 1;
 	private static final Double PRECIO_DOS_HORAS = 50000D;
+	private static final String ESTADO_APROBACION = "APROBADA";
+	private static final String ESTADO_RECHAZO = "RECHAZADA";
 
 	private String crearURL(String uri) {
 		return "http://localhost:" + port + uri;
@@ -87,7 +89,7 @@ public class CitaTest {
 				HttpMethod.GET, entity2, CitaDto.class);
 		CitaDto cita = response2.getBody();
 		// assert
-		assertTrue( (respuesta==true) && (cita.getEstadoCita().equals("APROBADA")) );
+		assertTrue( (respuesta==true) && (cita.getEstadoCita().equals(ESTADO_APROBACION)) );
 	}
 	
 	@Test
@@ -106,7 +108,7 @@ public class CitaTest {
 				HttpMethod.GET, entity2, CitaDto.class);
 		CitaDto cita = response2.getBody();
 		// assert
-		assertTrue( (respuesta==true) && (cita.getEstadoCita().equals("REACHAZADA")) );
+		assertTrue( (respuesta==true) && (cita.getEstadoCita().equals(ESTADO_RECHAZO)) );
 	}
 	
 	@Test
