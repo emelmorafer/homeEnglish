@@ -26,18 +26,18 @@ public class ClienteRestController {
 	@Autowired
 	ClienteRepository clienteRepository;
 
-	@PostMapping(value = "/guardarCliente")
+	@PostMapping(value = "/cliente")
 	public ClienteDto guardarCliente(@RequestBody ClienteDto cliente) {
 		return clienteService.guardarCliente(cliente);
 	}
 
-	@GetMapping(value = "/getClienteById")
+	@GetMapping(value = "/cliente/id")
 	public ClienteDto getClienteByID(@RequestParam(value = "id") long id) {
 		return clienteService.obtenerClientePorId(id);
 
 	}
 
-	@GetMapping(value = "/getListCliente")
+	@GetMapping(value = "/cliente/list")
 	public List<ClienteDto> getListCliente() {
 		return clienteService.obtenerListadoClientes();
 	}

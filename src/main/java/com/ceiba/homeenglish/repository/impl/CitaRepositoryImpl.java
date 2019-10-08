@@ -18,11 +18,15 @@ import com.ceiba.homeenglish.repository.rowmapper.CitaDtoRowMapper;
 @Repository
 public class CitaRepositoryImpl extends Dao implements CitaRepository {
 
-	private static Logger LOGGER = LoggerFactory.getLogger(CitaRepositoryImpl.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(CitaRepositoryImpl.class);
 	
-	private static String SQL = "";
+	private String sql = "";
 	
-	private static String SELECT_SQL = "SELECT cit.id, "
+	private static final String ERROR_LISTADO_CITAS = "Error al obtener el listado de citas: ";
+	
+	private static final List<CitaDto> LISTA_VACIA = new ArrayList<>();
+	
+	private static final String SELECT_SQL = "SELECT cit.id, "
 			+ "cli.id AS idCliente, "
 			+ "cli.nombre || ' ' || cli.apellido AS nombreCompletoCliente, "
 			+ "pro.id AS idProfesor, "
@@ -83,11 +87,11 @@ public class CitaRepositoryImpl extends Dao implements CitaRepository {
 	
 	@Override
 	public CitaDto findById(Long id) {
-		SQL = SELECT_SQL + "WHERE cit.id = ? ";
+		sql = SELECT_SQL + "WHERE cit.id = ? ";
 		try {
-			return getJdbcTemplate().queryForObject(SQL, new Object[] { id }, new CitaDtoRowMapper());
+			return getJdbcTemplate().queryForObject(sql, new Object[] { id }, new CitaDtoRowMapper());
 		} catch (Exception e) {
-			LOGGER.error("Error al consultar el cita: " + e);
+			LOGGER.error("Error al consultar la cita: " + e);
 			return new CitaDto();
 		}
 	}
@@ -95,72 +99,72 @@ public class CitaRepositoryImpl extends Dao implements CitaRepository {
 	
 	@Override
 	public List<CitaDto> findAll() {
-		SQL = SELECT_SQL;
+		sql = SELECT_SQL;
 		try {					
-			return getNamedParameterJdbcTemplate().query(SQL, new CitaDtoRowMapper());
+			return getNamedParameterJdbcTemplate().query(sql, new CitaDtoRowMapper());
 		} catch (Exception e) {
-			LOGGER.error("Error al obtener el listado de citas: " + e);
-			return new ArrayList<CitaDto>();
+			LOGGER.error(ERROR_LISTADO_CITAS + e);
+			return LISTA_VACIA;
 		}
 	}
 
 	
 	@Override
 	public List<CitaDto> obtenerCitasAprobadasPorIdCliente(Long idCliente) {
-		SQL = SELECT_SQL + "WHERE cit.estado_cita = 'APROBADA' AND cli.id = :id_cliente ";
+		sql = SELECT_SQL + "WHERE cit.estado_cita = 'APROBADA' AND cli.id = :id_cliente ";
 		try {	
 			Map<String, Object> parametros = new HashMap<>();
 			parametros.put("id_cliente", idCliente);
 			
-			return getNamedParameterJdbcTemplate().query(SQL, parametros, new CitaDtoRowMapper());
+			return getNamedParameterJdbcTemplate().query(sql, parametros, new CitaDtoRowMapper());
 		} catch (Exception e) {
-			LOGGER.error("Error al obtener el listado de citas: " + e);
-			return new ArrayList<CitaDto>();
+			LOGGER.error(ERROR_LISTADO_CITAS + e);
+			return LISTA_VACIA;
 		}
 	}
 	
 	
 	@Override
 	public List<CitaDto> obtenerCitasAprobadasPorIdProfesor(Long idProfesor) {
-		SQL = SELECT_SQL + "WHERE cit.estado_cita = 'APROBADA' AND pro.id = :id_profesor ";
+		sql = SELECT_SQL + "WHERE cit.estado_cita = 'APROBADA' AND pro.id = :id_profesor ";
 		try {
 			Map<String, Object> parametros = new HashMap<>();
 			parametros.put("id_profesor", idProfesor);
 			
-			return getNamedParameterJdbcTemplate().query(SQL, parametros, new CitaDtoRowMapper());
+			return getNamedParameterJdbcTemplate().query(sql, parametros, new CitaDtoRowMapper());
 		} catch (Exception e) {
-			LOGGER.error("Error al obtener el listado de citas: " + e);
-			return new ArrayList<CitaDto>();
+			LOGGER.error(ERROR_LISTADO_CITAS + e);
+			return LISTA_VACIA;
 		}
 	}
 	
 	
 	@Override
 	public List<CitaDto> obtenerCitasNoRechazadasPorIdProfesor(Long idProfesor) {
-		SQL = SELECT_SQL + "WHERE cit.estado_cita <> 'RECHAZADA' AND pro.id = :id_profesor ";
+		sql = SELECT_SQL + "WHERE cit.estado_cita <> 'RECHAZADA' AND pro.id = :id_profesor ";
 		try {	
 			Map<String, Object> parametros = new HashMap<>();
 			parametros.put("id_profesor", idProfesor);
 			
-			return getNamedParameterJdbcTemplate().query(SQL, parametros, new CitaDtoRowMapper());
+			return getNamedParameterJdbcTemplate().query(sql, parametros, new CitaDtoRowMapper());
 		} catch (Exception e) {
-			LOGGER.error("Error al obtener el listado de citas: " + e);
-			return new ArrayList<CitaDto>();
+			LOGGER.error(ERROR_LISTADO_CITAS + e);
+			return LISTA_VACIA;
 		}
 	}
 	
 	
 	@Override
 	public List<CitaDto> obtenerCitasPendientesDePago(LocalDateTime fechaActual) {
-		SQL = SELECT_SQL + "WHERE cit.estado_cita = 'PENDIENTE DE PAGO' AND cit.fecha_inicio >= :fecha_actual ";
+		sql = SELECT_SQL + "WHERE cit.estado_cita = 'PENDIENTE DE PAGO' AND cit.fecha_inicio >= :fecha_actual ";
 		try {	
 			Map<String, Object> parametros = new HashMap<>();
 			parametros.put("fecha_actual", fechaActual);
 			
-			return getNamedParameterJdbcTemplate().query(SQL, parametros, new CitaDtoRowMapper());
+			return getNamedParameterJdbcTemplate().query(sql, parametros, new CitaDtoRowMapper());
 		} catch (Exception e) {
-			LOGGER.error("Error al obtener el listado de citas: " + e);
-			return new ArrayList<CitaDto>();
+			LOGGER.error(ERROR_LISTADO_CITAS + e);
+			return LISTA_VACIA;
 		}
 	}
 	

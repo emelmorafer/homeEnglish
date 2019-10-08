@@ -15,9 +15,9 @@ import com.ceiba.homeenglish.repository.rowmapper.ProfesorDtoRowMapper;
 @Repository
 public class ProfesorRepositoryImpl extends Dao implements ProfesorRepository {
 
-	private static Logger LOGGER = LoggerFactory.getLogger(ProfesorRepositoryImpl.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(ProfesorRepositoryImpl.class);
 	
-	private static String SQL = "";
+	private String sql = "";
 
 	private static final String SQL_INSERT = 
 			"INSERT INTO Profesor (cedula,nombre,apellido,edad,direccion) VALUES (?,?,?,?,?) ";
@@ -55,9 +55,9 @@ public class ProfesorRepositoryImpl extends Dao implements ProfesorRepository {
 	
 	@Override
 	public ProfesorDto findById(Long id) {
-		SQL = "SELECT * FROM Profesor WHERE id = ? ";
+		sql = "SELECT * FROM Profesor WHERE id = ? ";
 		try {
-			return getJdbcTemplate().queryForObject(SQL, new Object[] { id }, new ProfesorDtoRowMapper());
+			return getJdbcTemplate().queryForObject(sql, new Object[] { id }, new ProfesorDtoRowMapper());
 		} catch (Exception e) {
 			LOGGER.error("Error al consultar el profesor: " + e);
 			return new ProfesorDto();
@@ -67,12 +67,12 @@ public class ProfesorRepositoryImpl extends Dao implements ProfesorRepository {
 	
 	@Override
 	public List<ProfesorDto> findAll() {
-		SQL = "SELECT * FROM Profesor";
+		sql = "SELECT * FROM Profesor";
 		try {					
-			return getNamedParameterJdbcTemplate().query(SQL, new ProfesorDtoRowMapper());
+			return getNamedParameterJdbcTemplate().query(sql, new ProfesorDtoRowMapper());
 		} catch (Exception e) {
 			LOGGER.error("Error al obtener el listado de profesors: " + e);
-			return new ArrayList<ProfesorDto>();
+			return new ArrayList<>();
 		}
 	}
 	

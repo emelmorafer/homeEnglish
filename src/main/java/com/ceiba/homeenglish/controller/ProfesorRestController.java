@@ -24,17 +24,17 @@ public class ProfesorRestController {
 	ProfesorService profesorService; 
 	
 	
-	@PostMapping(value = "/guardarProfesor")
+	@PostMapping(value = "/profesor")
     public ProfesorDto guardarProfesor(@RequestBody ProfesorDto profesor) {		
 		return profesorService.guardarProfesor(profesor);
 	}
 	
-	@GetMapping(value = "/getProfesorById")
+	@GetMapping(value = "/profesor/id")
     public ProfesorDto getProfesorByID(@RequestParam(value="id") long id) {		
 		return profesorService.obtenerProfesorPorId(id);
 	}
 	
-	@GetMapping(value = "/getListProfesor")
+	@GetMapping(value = "/profesor/list")
     public List<ProfesorDto> getListProfesor() {		
 		return profesorService.obtenerListadoProfesores();
 	}

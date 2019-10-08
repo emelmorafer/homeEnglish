@@ -79,11 +79,8 @@ public class CitaServiceImpl implements CitaService{
     
 	public boolean verificarVencimientoCita(CitaDto cita, LocalDateTime fechaActual) {
 		LocalDateTime fechaEn24Horas = fechaActual.plusHours(NUMERO_HORAS_DIA);
-		if (cita.getFechaInicio().isBefore(fechaEn24Horas)) {
-			return true;
-		} else {
-			return false;
-		}
+		
+		return cita.getFechaInicio().isBefore(fechaEn24Horas);
 	}
     
 
@@ -108,22 +105,22 @@ public class CitaServiceImpl implements CitaService{
 	
 	public boolean verificarCruce2Citas(CitaDto citaPorGuardar, CitaDto citaGuardada) {	
 		citaPorGuardar.setFechaFin(obtenerFechaFinCita(citaPorGuardar));
+		boolean verificacion = false;
 		if(citaPorGuardar.getFechaInicio().isAfter(citaGuardada.getFechaInicio()) &&
 		   citaPorGuardar.getFechaInicio().isBefore(citaGuardada.getFechaFin())) {		
-			return true;
+			verificacion = true;
 		}else {
 			if(citaPorGuardar.getFechaFin().isAfter(citaGuardada.getFechaInicio()) &&
 			   citaPorGuardar.getFechaFin().isBefore(citaGuardada.getFechaFin())) {
-				return true;						
+				verificacion = true;						
 			}else {
 				if(citaPorGuardar.getFechaInicio().isBefore(citaGuardada.getFechaInicio()) &&
 				   citaPorGuardar.getFechaFin().isAfter(citaGuardada.getFechaFin())) {
-					return true;									
-				}else {
-					return false;							
+					verificacion = true;									
 				}				
 			}
 		}
+		return verificacion;
 	}
 	
 

@@ -43,7 +43,7 @@ public class ClienteTest {
 		HttpEntity<ClienteDto> entity = new HttpEntity<>(request, headers);
 		// act
 		ResponseEntity<ClienteDto> response = restTemplate.exchange(
-				crearURL("/homeEnglish/guardarCliente"), HttpMethod.POST, entity, ClienteDto.class);
+				crearURL("/homeEnglish/cliente"), HttpMethod.POST, entity, ClienteDto.class);
 		ClienteDto cliente = response.getBody();
 		// assert
 		assertEquals(NOMBRE_CLIENTE_CREACION,cliente.getNombre());
@@ -55,7 +55,7 @@ public class ClienteTest {
 		HttpEntity<ClienteDto> entity = new HttpEntity<>(headers);
 		// act
 		ResponseEntity<ClienteDto> response = restTemplate.exchange(
-				crearURL("/homeEnglish/getClienteById?id=" + ID_CLIENTE_CREADO), 
+				crearURL("/homeEnglish/cliente/id?id=" + ID_CLIENTE_CREADO), 
 				HttpMethod.GET, entity, ClienteDto.class);
 		ClienteDto cliente = response.getBody();
 		// assert
@@ -68,7 +68,7 @@ public class ClienteTest {
 		HttpEntity<ClienteDto[]> entity = new HttpEntity<>(headers);
 		// act
 		ResponseEntity<ClienteDto[]> response = restTemplate.exchange(
-				crearURL("/homeEnglish/getListCliente"), 
+				crearURL("/homeEnglish/cliente/list"), 
 				HttpMethod.GET, entity, ClienteDto[].class);
 		ClienteDto[] arrayCliente = response.getBody();
 		// assert

@@ -22,52 +22,52 @@ public class CitaRestController {
 	@Autowired
 	CitaService citaService; 
 	
-	@PostMapping(value = "/guardarCita")
+	@PostMapping(value = "/cita")
     public CitaDto guardarCita(@RequestBody CitaDto cita) {		
 		return citaService.guardarCita(cita);
 	}
 	
-	@GetMapping(value = "/aprobarCitaPorId")
+	@GetMapping(value = "/cita/aprobacion")
     public boolean aprobarCitaPorId(@RequestParam(value="id") long id) {		
 		return citaService.aprobarCitaPorId(id);
 	}
 	
-	@GetMapping(value = "/rechazarCitaPorId")
+	@GetMapping(value = "/cita/rechazo")
     public boolean rechazarCitaPorId(@RequestParam(value="id") long id) {		
 		return citaService.rechazarCitaPorId(id);
 	}
 	
-	@GetMapping(value = "/getCitaById")
+	@GetMapping(value = "/cita/id")
     public CitaDto getCitaByID(@RequestParam(value="id") long id) {		
 		return citaService.obtenerCitaPorId(id);
 	}
 	
-	@GetMapping(value = "/getListCita")
+	@GetMapping(value = "/cita/list")
     public List<CitaDto> getListCita() {		
 		return citaService.obtenerListadoCitas();
 	}
 	
-	@GetMapping(value = "/getListCitasAprobadasByIdCliente")
+	@GetMapping(value = "/cita/list/aprobada/cliente")
     public List<CitaDto> getListCitasAprobadasByIdCliente(@RequestParam(value="idCliente") long idCliente) {		
 		return citaService.obtenerListadoCitasAprobadasPorCliente(idCliente);
 	}
 	
-	@GetMapping(value = "/getListCitasAprobadasByIdProfesor")
+	@GetMapping(value = "/cita/list/aprobada/profesor")
     public List<CitaDto> getListCitasAprobadasByIdProfesor(@RequestParam(value="idProfesor") long idProfesor) {		
 		return citaService.obtenerListadoCitasAprobadasPorProfesor(idProfesor);
 	}
 	
-	@PostMapping(value = "/verificarValidesGuardadoDeCita")
+	@PostMapping(value = "/cita/verificacion/validez")
     public boolean verificarValidesGuardadoDeCita(@RequestBody CitaDto cita) {		
 		return citaService.verificarValidesGuardadoDeCita(cita);
 	}
 		
-	@PostMapping(value = "/calcularPrecioCita")
+	@PostMapping(value = "/cita/calculo/precio")
     public double calcularPrecioCita(@RequestBody CitaDto cita) {
 		return citaService.calcularPrecioCita(cita);
 	}
 	
-	@GetMapping(value = "/rechazarCitasVencidas")
+	@GetMapping(value = "/cita/rechazo/vencidas")
     public boolean rechazarCitasVencidas() {		
 		return citaService.rechazarCitasVencidas();
 	}

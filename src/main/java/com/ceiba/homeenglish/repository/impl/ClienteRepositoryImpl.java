@@ -14,9 +14,9 @@ import com.ceiba.homeenglish.repository.rowmapper.ClienteDtoRowMapper;
 @Repository
 public class ClienteRepositoryImpl extends Dao implements ClienteRepository {
 
-	private static Logger LOGGER = LoggerFactory.getLogger(ClienteRepositoryImpl.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(ClienteRepositoryImpl.class);
 			
-	private static String SQL = "";
+	private String sql = "";
 	
 	private static final String SQL_INSERT = 
 			"INSERT INTO Cliente (cedula,nombre,apellido,edad,direccion) VALUES (?,?,?,?,?) ";
@@ -54,9 +54,9 @@ public class ClienteRepositoryImpl extends Dao implements ClienteRepository {
 	
 	@Override
 	public ClienteDto findById(Long id) {
-		SQL = "SELECT * FROM Cliente WHERE id = ? ";
+		sql = "SELECT * FROM Cliente WHERE id = ? ";
 		try {
-			return getJdbcTemplate().queryForObject(SQL, new Object[] { id }, new ClienteDtoRowMapper());
+			return getJdbcTemplate().queryForObject(sql, new Object[] { id }, new ClienteDtoRowMapper());
 		} catch (Exception e) {
 			LOGGER.error("Error al consultar el cliente: " + e);
 			return new ClienteDto();
@@ -66,12 +66,12 @@ public class ClienteRepositoryImpl extends Dao implements ClienteRepository {
 	
 	@Override
 	public List<ClienteDto> findAll() {
-		SQL = "SELECT * FROM Cliente";
+		sql = "SELECT * FROM Cliente";
 		try {					
-			return getNamedParameterJdbcTemplate().query(SQL, new ClienteDtoRowMapper());
+			return getNamedParameterJdbcTemplate().query(sql, new ClienteDtoRowMapper());
 		} catch (Exception e) {
 			LOGGER.error("Error al obtener el listado de clientes: " + e);
-			return new ArrayList<ClienteDto>();
+			return new ArrayList<>();
 		}
 	}
 
