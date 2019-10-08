@@ -1,6 +1,7 @@
 package com.ceiba.homeenglish.repository.impl;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -44,6 +45,8 @@ public class CitaRepositoryImpl extends Dao implements CitaRepository {
 			"UPDATE Cita SET id_cliente=?,id_profesor=?,estado_cita=?,fecha_inicio=?,"
 			+ "fecha_fin=?,cantidad_horas=?,precio=?,direccion=?,nota=? WHERE id = ? ";
 	
+	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+	                                              
 	@Override
 	public CitaDto save (CitaDto citaDto) {
 		try {	
@@ -52,8 +55,8 @@ public class CitaRepositoryImpl extends Dao implements CitaRepository {
 						,citaDto.getIdCliente()
 						,citaDto.getIdProfesor()
 						,citaDto.getEstadoCita()
-						,citaDto.getFechaInicio()
-						,citaDto.getFechaFin()
+						,citaDto.getFechaInicio().format(formatter)
+						,citaDto.getFechaFin().format(formatter)
 						,citaDto.getCantidadHoras()
 						,citaDto.getPrecio()
 						,citaDto.getDireccion()
@@ -63,8 +66,8 @@ public class CitaRepositoryImpl extends Dao implements CitaRepository {
 						,citaDto.getIdCliente()
 						,citaDto.getIdProfesor()
 						,citaDto.getEstadoCita()
-						,citaDto.getFechaInicio()
-						,citaDto.getFechaFin()
+						,citaDto.getFechaInicio().format(formatter)
+						,citaDto.getFechaFin().format(formatter)
 						,citaDto.getCantidadHoras()
 						,citaDto.getPrecio()
 						,citaDto.getDireccion()
@@ -149,12 +152,12 @@ public class CitaRepositoryImpl extends Dao implements CitaRepository {
 	
 	@Override
 	public List<CitaDto> obtenerCitasPendientesDePago(LocalDateTime fechaActual) {
-		SQL = SELECT_SQL + "WHERE cit.estado_cita = 'PENDIENTE DE PAGO' AND cit.fechaInicio >= :fecha_actual ";
+		SQL = SELECT_SQL + "WHERE cit.estado_cita = 'PENDIENTE DE PAGO' AND cit.fecha_inicio >= :fecha_actual ";
 		try {	
 			Map<String, Object> parametros = new HashMap<>();
 			parametros.put("fecha_actual", fechaActual);
 			
-			return getNamedParameterJdbcTemplate().query(SQL, new CitaDtoRowMapper());
+			return getNamedParameterJdbcTemplate().query(SQL, parametros, new CitaDtoRowMapper());
 		} catch (Exception e) {
 			LOGGER.error("Error al obtener el listado de citas: " + e);
 			return new ArrayList<CitaDto>();

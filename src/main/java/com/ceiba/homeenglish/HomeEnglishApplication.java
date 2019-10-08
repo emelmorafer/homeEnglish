@@ -10,6 +10,7 @@ import org.quartz.impl.StdSchedulerFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -19,6 +20,7 @@ import com.ceiba.homeenglish.job.JobCita;
 //@ComponentScan("")
 @SpringBootApplication
 @EnableScheduling
+@EnableAutoConfiguration
 public class HomeEnglishApplication {
 	
 	private static final String URL_SERVICIO = "http://localhost:8080/homeEnglish/rechazarCitasVencidas";

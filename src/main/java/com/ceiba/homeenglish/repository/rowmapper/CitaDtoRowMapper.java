@@ -17,7 +17,7 @@ public class CitaDtoRowMapper implements RowMapper<CitaDto> {
 		cita.setNombreCompletoProfesor(rs.getString("nombreCompletoProfesor"));
 		cita.setEstadoCita(rs.getString("estadoCita"));
 		cita.setFechaInicio(rs.getTimestamp("fechaInicio").toLocalDateTime());
-		cita.setFechaFin(rs.getTimestamp("fechaInicio").toLocalDateTime());
+		cita.setFechaFin(rs.getTimestamp("fechaFin").toLocalDateTime());
 		cita.setCantidadHoras(rs.getInt("cantidadHoras"));
 		cita.setPrecio(rs.getDouble("precio"));
 		cita.setDireccion(rs.getString("direccion"));

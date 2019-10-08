@@ -11,7 +11,7 @@ public class CitaDto {
 	private String nombreCompletoProfesor;
 	private String estadoCita;
 	private LocalDateTime fechaInicio;
-	private LocalDateTime fechaFin;
+	private LocalDateTime fechaFin;	
 	private int cantidadHoras;
 	private double precio;
 	private String direccion;
