@@ -30,11 +30,8 @@ public class Profesor {
 	public String direccion;
 	
 	
-	public Profesor() {}
-	
-	public Profesor(Long id) {
+	public Profesor() {
 		super();
-		this.id = id;
 	}
 
 	

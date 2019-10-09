@@ -30,11 +30,8 @@ public class Cliente {
 	public String direccion;
 	
 	
-	public Cliente() {}
-	
-	public Cliente(Long id) {
+	public Cliente() {
 		super();
-		this.id = id;
 	}
 
 
