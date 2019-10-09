@@ -28,9 +28,9 @@ public class CitaRepositoryImpl extends Dao implements CitaRepository {
 	
 	private static final String SELECT_SQL = "SELECT cit.id, "
 			+ "cli.id AS idCliente, "
-			+ "cli.nombre || ' ' || cli.apellido AS nombreCompletoCliente, "
+			+ "CONCAT(cli.nombre,' ',cli.apellido) AS nombreCompletoCliente, "
 			+ "pro.id AS idProfesor, "
-			+ "pro.nombre || ' ' || pro.apellido AS nombreCompletoProfesor, "
+			+ "CONCAT(pro.nombre,' ',pro.apellido) AS nombreCompletoProfesor, "
 			+ "cit.estado_cita AS estadoCita, "
 			+ "cit.fecha_inicio AS fechaInicio, "
 			+ "cit.fecha_fin AS fechaFin, "
@@ -38,7 +38,9 @@ public class CitaRepositoryImpl extends Dao implements CitaRepository {
 			+ "cit.precio AS precio, "
 			+ "cit.direccion AS direccion, "
 			+ "cit.nota AS nota "
-			+ "FROM Cita cit JOIN Cliente cli JOIN Profesor pro ";
+			+ "FROM Cita cit "  
+			+ "LEFT JOIN Cliente cli ON (cit.id_cliente = cli.id) " 
+			+ "LEFT JOIN Profesor pro ON (cit.id_profesor = pro.id) ";
 	
 	private static final String SQL_INSERT = 
 			"INSERT INTO Cita (id_cliente,id_profesor,estado_cita,"
@@ -172,7 +174,6 @@ public class CitaRepositoryImpl extends Dao implements CitaRepository {
 
 	@Override
 	protected String getSequenceName() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 	

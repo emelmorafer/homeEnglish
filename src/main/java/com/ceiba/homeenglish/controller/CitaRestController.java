@@ -16,7 +16,7 @@ import com.ceiba.homeenglish.service.CitaService;
 
 @CrossOrigin(origins =  { "*"})
 @RestController
-@RequestMapping("homeEnglish")
+@RequestMapping("homeenglish")
 public class CitaRestController {
 	
 	@Autowired
@@ -48,12 +48,12 @@ public class CitaRestController {
 	}
 	
 	@GetMapping(value = "/cita/list/aprobada/cliente")
-    public List<CitaDto> getListCitasAprobadasByIdCliente(@RequestParam(value="idCliente") long idCliente) {		
+    public List<CitaDto> getListCitasAprobadasByIdCliente(@RequestParam(value="idcliente") long idCliente) {		
 		return citaService.obtenerListadoCitasAprobadasPorCliente(idCliente);
 	}
 	
 	@GetMapping(value = "/cita/list/aprobada/profesor")
-    public List<CitaDto> getListCitasAprobadasByIdProfesor(@RequestParam(value="idProfesor") long idProfesor) {		
+    public List<CitaDto> getListCitasAprobadasByIdProfesor(@RequestParam(value="idprofesor") long idProfesor) {		
 		return citaService.obtenerListadoCitasAprobadasPorProfesor(idProfesor);
 	}
 	

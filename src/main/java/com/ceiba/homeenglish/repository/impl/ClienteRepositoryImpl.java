@@ -79,7 +79,6 @@ public class ClienteRepositoryImpl extends Dao implements ClienteRepository {
 
 	@Override
 	protected String getSequenceName() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

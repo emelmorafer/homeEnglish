@@ -80,7 +80,6 @@ public class ProfesorRepositoryImpl extends Dao implements ProfesorRepository {
 
 	@Override
 	protected String getSequenceName() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

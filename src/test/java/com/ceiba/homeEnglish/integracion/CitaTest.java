@@ -54,7 +54,7 @@ public class CitaTest {
 		HttpEntity<CitaDto> entity = new HttpEntity<>(request, headers);
 		// act
 		ResponseEntity<CitaDto> response = restTemplate.exchange(
-				crearURL("/homeEnglish/cita"), HttpMethod.POST, entity, CitaDto.class);
+				crearURL("/homeenglish/cita"), HttpMethod.POST, entity, CitaDto.class);
 		CitaDto cita = response.getBody();
 		// assert
 		assertEquals(NOTA_CREACION,cita.getNota());
@@ -66,7 +66,7 @@ public class CitaTest {
 		HttpEntity<CitaDto> entity = new HttpEntity<>(headers);
 		// act
 		ResponseEntity<CitaDto> response = restTemplate.exchange(
-				crearURL("/homeEnglish/cita/id?id=" + ID_CITA_CREADA), 
+				crearURL("/homeenglish/cita/id?id=" + ID_CITA_CREADA), 
 				HttpMethod.GET, entity, CitaDto.class);
 		CitaDto cita = response.getBody();
 		// assert
@@ -80,12 +80,12 @@ public class CitaTest {
 		HttpEntity<CitaDto> entity2 = new HttpEntity<>(headers);
 		// act
 		ResponseEntity<Boolean> response = restTemplate.exchange(
-				crearURL("/homeEnglish/cita/aprobacion?id=" + ID_CITA_CREADA), 
+				crearURL("/homeenglish/cita/aprobacion?id=" + ID_CITA_CREADA), 
 				HttpMethod.GET, entity, Boolean.class);
 		Boolean respuesta = response.getBody();
 		
 		ResponseEntity<CitaDto> response2 = restTemplate.exchange(
-				crearURL("/homeEnglish/cita/id?id=" + ID_CITA_CREADA), 
+				crearURL("/homeenglish/cita/id?id=" + ID_CITA_CREADA), 
 				HttpMethod.GET, entity2, CitaDto.class);
 		CitaDto cita = response2.getBody();
 		// assert
@@ -99,12 +99,12 @@ public class CitaTest {
 		HttpEntity<CitaDto> entity2 = new HttpEntity<>(headers);
 		// act
 		ResponseEntity<Boolean> response = restTemplate.exchange(
-				crearURL("/homeEnglish/cita/rechazo?id=" + ID_CITA_CREADA), 
+				crearURL("/homeenglish/cita/rechazo?id=" + ID_CITA_CREADA), 
 				HttpMethod.GET, entity, Boolean.class);
 		Boolean respuesta = response.getBody();
 		
 		ResponseEntity<CitaDto> response2 = restTemplate.exchange(
-				crearURL("/homeEnglish/cita/id?id=" + ID_CITA_CREADA), 
+				crearURL("/homeenglish/cita/id?id=" + ID_CITA_CREADA), 
 				HttpMethod.GET, entity2, CitaDto.class);
 		CitaDto cita = response2.getBody();
 		// assert
@@ -117,7 +117,7 @@ public class CitaTest {
 		HttpEntity<CitaDto[]> entity = new HttpEntity<>(headers);
 		// act
 		ResponseEntity<CitaDto[]> response = restTemplate.exchange(
-				crearURL("/homeEnglish/cita/list"), 
+				crearURL("/homeenglish/cita/list"), 
 				HttpMethod.GET, entity, CitaDto[].class);
 		CitaDto[] arrayCita = response.getBody();
 		// assert
@@ -130,7 +130,7 @@ public class CitaTest {
 		HttpEntity<CitaDto[]> entity = new HttpEntity<>(headers);
 		// act
 		ResponseEntity<CitaDto[]> response = restTemplate.exchange(
-				crearURL("/homeEnglish/cita/list/aprobada/cliente?idCliente=" + ID_CLIENTE_CREADO), 
+				crearURL("/homeenglish/cita/list/aprobada/cliente?idcliente=" + ID_CLIENTE_CREADO), 
 				HttpMethod.GET, entity, CitaDto[].class);
 		CitaDto[] arrayCita = response.getBody();
 		// assert
@@ -143,7 +143,7 @@ public class CitaTest {
 		HttpEntity<CitaDto[]> entity = new HttpEntity<>(headers);
 		// act
 		ResponseEntity<CitaDto[]> response = restTemplate.exchange(
-				crearURL("/homeEnglish/cita/list/aprobada/profesor?idProfesor=" + ID_PROFESOR_CREADO), 
+				crearURL("/homeenglish/cita/list/aprobada/profesor?idprofesor=" + ID_PROFESOR_CREADO), 
 				HttpMethod.GET, entity, CitaDto[].class);
 		CitaDto[] arrayCita = response.getBody();
 		// assert
@@ -169,10 +169,10 @@ public class CitaTest {
 		HttpEntity<CitaDto> entity1 = new HttpEntity<>(request1, headers);
 		HttpEntity<CitaDto> entity2 = new HttpEntity<>(request2, headers);
 		
-		restTemplate.exchange(crearURL("/homeEnglish/cita"), HttpMethod.POST, entity1, CitaDto.class);
+		restTemplate.exchange(crearURL("/homeenglish/cita"), HttpMethod.POST, entity1, CitaDto.class);
 		// act
 		ResponseEntity<Boolean> response2 = restTemplate.exchange(
-				crearURL("/homeEnglish/cita/verificacion/validez"), HttpMethod.POST, entity2, Boolean.class);
+				crearURL("/homeenglish/cita/verificacion/validez"), HttpMethod.POST, entity2, Boolean.class);
 		
 		boolean citaValida = response2.getBody();
 		
@@ -199,10 +199,10 @@ public class CitaTest {
 		HttpEntity<CitaDto> entity1 = new HttpEntity<>(request1, headers);
 		HttpEntity<CitaDto> entity2 = new HttpEntity<>(request2, headers);
 		
-		restTemplate.exchange(crearURL("/homeEnglish/cita"), HttpMethod.POST, entity1, CitaDto.class);
+		restTemplate.exchange(crearURL("/homeenglish/cita"), HttpMethod.POST, entity1, CitaDto.class);
 		// act
 		ResponseEntity<Boolean> response2 = restTemplate.exchange(
-				crearURL("/homeEnglish/cita/verificacion/validez"), HttpMethod.POST, entity2, Boolean.class);
+				crearURL("/homeenglish/cita/verificacion/validez"), HttpMethod.POST, entity2, Boolean.class);
 		
 		boolean citaValida = response2.getBody();
 		
@@ -217,7 +217,7 @@ public class CitaTest {
 		CitaDto request = new CitaTestDataBuilder().conCantidadHoras(DOS_HORAS).build();
 		HttpEntity<CitaDto> entity = new HttpEntity<>(request, headers);
 		// act
-		ResponseEntity<Double> response = restTemplate.exchange(crearURL("/homeEnglish/cita/calculo/precio"), 
+		ResponseEntity<Double> response = restTemplate.exchange(crearURL("/homeenglish/cita/calculo/precio"), 
 				HttpMethod.POST, entity, Double.class);
 		Double precio = response.getBody();
 		// assert
@@ -231,7 +231,7 @@ public class CitaTest {
 		HttpEntity<Boolean> entity = new HttpEntity<>(headers);
 		// act
 		ResponseEntity<Boolean> response = restTemplate.exchange(
-				crearURL("/homeEnglish/cita/rechazo/vencidas"), 
+				crearURL("/homeenglish/cita/rechazo/vencidas"), 
 				HttpMethod.GET, entity, Boolean.class);
 		Boolean respuesta = response.getBody();
 		// assert

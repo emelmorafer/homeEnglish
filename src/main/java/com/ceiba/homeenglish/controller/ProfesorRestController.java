@@ -16,7 +16,7 @@ import com.ceiba.homeenglish.service.ProfesorService;
 
 @CrossOrigin(origins =  { "*"})
 @RestController
-@RequestMapping("homeEnglish")
+@RequestMapping("homeenglish")
 public class ProfesorRestController {
 	
 	

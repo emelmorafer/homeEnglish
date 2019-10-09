@@ -17,7 +17,7 @@ import com.ceiba.homeenglish.service.ClienteService;
 
 @CrossOrigin(origins = { "*" })
 @RestController
-@RequestMapping("homeEnglish")
+@RequestMapping("homeenglish")
 public class ClienteRestController {
 
 	@Autowired
