@@ -170,11 +170,4 @@ public class CitaRepositoryImpl extends Dao implements CitaRepository {
 		}
 	}
 	
-	
-
-	@Override
-	protected String getSequenceName() {
-		return null;
-	}
-	
 }

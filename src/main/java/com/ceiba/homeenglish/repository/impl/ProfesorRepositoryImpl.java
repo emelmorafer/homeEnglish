@@ -75,25 +75,6 @@ public class ProfesorRepositoryImpl extends Dao implements ProfesorRepository {
 			return new ArrayList<>();
 		}
 	}
-	
-	
-
-	@Override
-	protected String getSequenceName() {
-		return null;
-	}
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
 
 
 }
