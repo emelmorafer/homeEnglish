@@ -30,6 +30,7 @@ public class ClienteTest {
 	HttpHeaders headers = new HttpHeaders();
 
 	private static final String NOMBRE_CLIENTE_CREACION = "Emel";
+	private static final String NOMBRE_CLIENTE_ACTUALIZADO = "Carlos";
 	private static final Long ID_CLIENTE_CREADO = 100L;
 
 	private String crearURL(String uri) {
@@ -47,6 +48,19 @@ public class ClienteTest {
 		ClienteDto cliente = response.getBody();
 		// assert
 		assertEquals(NOMBRE_CLIENTE_CREACION,cliente.getNombre());
+	}
+	
+	@Test
+	public void actualizarClienteTest() {
+		// arrange		
+		ClienteDto request = new ClienteTestDataBuilder().conId(ID_CLIENTE_CREADO).conNombre(NOMBRE_CLIENTE_ACTUALIZADO).build();
+		HttpEntity<ClienteDto> entity = new HttpEntity<>(request, headers);
+		// act
+		ResponseEntity<ClienteDto> response = restTemplate.exchange(
+				crearURL("/homeenglish/cliente"), HttpMethod.POST, entity, ClienteDto.class);
+		ClienteDto cliente = response.getBody();
+		// assert
+		assertEquals(NOMBRE_CLIENTE_ACTUALIZADO,cliente.getNombre());
 	}
 		
 	@Test
