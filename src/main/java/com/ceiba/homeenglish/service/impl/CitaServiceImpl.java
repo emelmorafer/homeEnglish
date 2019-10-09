@@ -3,20 +3,15 @@ package com.ceiba.homeenglish.service.impl;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ceiba.homeenglish.service.CitaService;
 import com.ceiba.homeenglish.dto.CitaDto;
 import com.ceiba.homeenglish.repository.CitaRepository;
-import com.ceiba.homeenglish.repository.impl.ClienteRepositoryImpl;
 
 @Service
 public class CitaServiceImpl implements CitaService{
-	
-	private static final Logger LOGGER = LoggerFactory.getLogger(CitaServiceImpl.class);
 	
 	private static final String ESTADO_CREACION = "PENDIENTE DE PAGO";
 	private static final String ESTADO_APROBACION = "APROBADA";
@@ -33,9 +28,9 @@ public class CitaServiceImpl implements CitaService{
 			citaDto.setPrecio(calcularPrecioCita(citaDto));
 			citaDto.setFechaFin(obtenerFechaFinCita(citaDto));			
 			try {
-				return citaRepository.save(citaDto);				
+				return citaRepository.save(citaDto);
+				
     		} catch (Exception e) {
-    			LOGGER.error("No fue posible guardar la cita: " + e);
     			return null;
     		}						
 		} else {
@@ -60,7 +55,6 @@ public class CitaServiceImpl implements CitaService{
     			citaRepository.save(cita);	
     			return true;
     		} catch (Exception e) {
-    			LOGGER.error("No fue posible aprobar la cita: " + e);
     			return false;
     		}    		
     	}else {
@@ -76,7 +70,6 @@ public class CitaServiceImpl implements CitaService{
     			citaRepository.save(cita);
     			return true;
     		} catch (Exception e) {
-    			LOGGER.error("No fue posible rechazar la cita: " + e);
     			return false;
     		}    		
     	}else {
@@ -151,7 +144,6 @@ public class CitaServiceImpl implements CitaService{
 			}
 			return true;
 		} catch (Exception e) {
-			LOGGER.error("No fue posible rechazar las citas vencidas: " + e);
 			return false;
 		} 	
 	}
