@@ -52,7 +52,7 @@ public abstract class Dao extends NamedParameterJdbcDaoSupport {
 	 * @return
 	 * @throws SQLException
 	 */
-	protected String SQL(String sql, Map<String, Object> replacementQueryParams) throws SQLException {
+	protected String sql(String sql, Map<String, Object> replacementQueryParams) throws SQLException {
 		try {
 			if (replacementQueryParams != null && !replacementQueryParams.isEmpty()) {
 				for (Map.Entry<String, Object> entry : replacementQueryParams.entrySet()) {
@@ -114,7 +114,7 @@ public abstract class Dao extends NamedParameterJdbcDaoSupport {
 					});
 		} catch (Exception e) {
 			LOGGER.error("Error al ejecutar la secuencia {}", sequencieName, e);
-			throw new SQLException("Error al ejecutar la secuencia {}", e);
+			throw new SQLException("Error al ejecutar la secuencia {}");
 		}
 	}
 
@@ -122,15 +122,16 @@ public abstract class Dao extends NamedParameterJdbcDaoSupport {
 	 * Permite valdiar si una columna es valida en el {@link ResultSet}
 	 */
 	public static boolean hasColumnResultSet(ResultSet rs, String column) {
+		boolean hasColumn = false;
 		try {
 
 			int i = rs.findColumn(column);
 			if ((i >= 0) && rs.getObject(column) != null) {
-				return true;
+				hasColumn = true;
 			}
-			return false;
+			return hasColumn;
 		} catch (Exception e) {
-			return false;
+			return hasColumn;
 		}
 	}
 

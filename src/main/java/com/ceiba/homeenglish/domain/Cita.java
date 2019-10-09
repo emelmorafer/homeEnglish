@@ -47,7 +47,9 @@ public class Cita {
 	private String nota;
 	
 	
-	public Cita() {}
+	public Cita() {
+		super();
+	}
 
 	
 	public Long getId() {
