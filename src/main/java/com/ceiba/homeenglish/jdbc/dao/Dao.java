@@ -29,12 +29,5 @@ public abstract class Dao extends NamedParameterJdbcDaoSupport {
 		super.setDataSource(this.dataSource);
 	}
 
-	@Override
-	protected void initDao() throws Exception {
-		if (LOGGER.isDebugEnabled()) {
-			LOGGER.debug("--- initDao ---");
-		}
-		super.initDao();
-	}
 
 }
