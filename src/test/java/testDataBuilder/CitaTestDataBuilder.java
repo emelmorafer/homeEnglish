@@ -76,10 +76,23 @@ public class CitaTestDataBuilder {
 		return this;
 	}
 		
-	public CitaDto build() {
-		return new CitaDto(this.id,this.idCliente,this.nombreCompletoCliente, 
-				this.idProfesor,this.nombreCompletoProfesor, this.estadoCita,this.fechaInicio,
-				this.fechaFin,this.cantidadHoras,this.precio,this.direccion,this.nota);
+	public CitaDto build() {		
+		CitaDto citaDto = new CitaDto();
+		
+		citaDto.setId(this.id);
+		citaDto.setIdCliente(this.idCliente);
+		citaDto.setNombreCompletoCliente(this.nombreCompletoCliente);
+		citaDto.setIdProfesor(this.idProfesor);
+		citaDto.setNombreCompletoProfesor(this.nombreCompletoProfesor);
+		citaDto.setEstadoCita(this.estadoCita);
+		citaDto.setFechaInicio(this.fechaInicio);
+		citaDto.setFechaFin(this.fechaFin);
+		citaDto.setCantidadHoras(this.cantidadHoras);
+		citaDto.setPrecio(this.precio);
+		citaDto.setDireccion(this.direccion);
+		citaDto.setNota(this.nota);
+				
+		return citaDto;
 	}
 
 

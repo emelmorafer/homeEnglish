@@ -18,29 +18,6 @@ public class CitaDto {
 	private String nota;
 	
 	
-	public CitaDto() {
-	}
-	
-
-	public CitaDto(Long id, long idCliente, String nombreCompletoCliente, long idProfesor,
-			String nombreCompletoProfesor, String estadoCita, LocalDateTime fechaInicio, LocalDateTime fechaFin,
-			int cantidadHoras, double precio, String direccion, String nota) {
-		super();
-		this.id = id;
-		this.idCliente = idCliente;
-		this.nombreCompletoCliente = nombreCompletoCliente;
-		this.idProfesor = idProfesor;
-		this.nombreCompletoProfesor = nombreCompletoProfesor;
-		this.estadoCita = estadoCita;
-		this.fechaInicio = fechaInicio;
-		this.fechaFin = fechaFin;
-		this.cantidadHoras = cantidadHoras;
-		this.precio = precio;
-		this.direccion = direccion;
-		this.nota = nota;
-	}
-
-
 	public Long getId() {
 		return id;
 	}
