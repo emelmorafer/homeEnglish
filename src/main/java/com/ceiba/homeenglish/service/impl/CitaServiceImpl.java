@@ -27,14 +27,11 @@ public class CitaServiceImpl implements CitaService{
 			citaDto.setEstadoCita(ESTADO_CREACION);
 			citaDto.setPrecio(calcularPrecioCita(citaDto));
 			citaDto.setFechaFin(obtenerFechaFinCita(citaDto));			
-			try {
-				return citaRepository.save(citaDto);
-				
-    		} catch (Exception e) {
-    			return null;
-    		}						
+
+			return citaRepository.save(citaDto);
+						
 		} else {
-			return null;
+			return new CitaDto();
 		}
 	}
 	
@@ -48,33 +45,27 @@ public class CitaServiceImpl implements CitaService{
 	
 
     public boolean aprobarCitaPorId(long id) {    	
-    	CitaDto cita = citaRepository.findById(id);  	
+    	CitaDto cita = citaRepository.findById(id);  
+    	boolean respuesta = false;
     	if(cita != null) {
-    		try {
-    			cita.setEstadoCita(ESTADO_APROBACION); 
-    			citaRepository.save(cita);	
-    			return true;
-    		} catch (Exception e) {
-    			return false;
-    		}    		
-    	}else {
-    		return false;
+    		cita.setEstadoCita(ESTADO_APROBACION); 		
+    		if(citaRepository.save(cita).getId() != null) {
+    			respuesta = true;
+    		}		
     	}
+    	return respuesta;
     }
     
     public boolean rechazarCitaPorId(long id) {    	
     	CitaDto cita = citaRepository.findById(id);	
+    	boolean respuesta = false;
     	if(cita != null) {
-    		try {
-    			cita.setEstadoCita(ESTADO_RECHAZO);
-    			citaRepository.save(cita);
-    			return true;
-    		} catch (Exception e) {
-    			return false;
-    		}    		
-    	}else {
-    		return false;
+    		cita.setEstadoCita(ESTADO_RECHAZO); 		
+    		if(citaRepository.save(cita).getId() != null) {
+    			respuesta = true;
+    		}		
     	}
+    	return respuesta;
     }
     
 	public boolean verificarVencimientoCita(CitaDto cita, LocalDateTime fechaActual) {
