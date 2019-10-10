@@ -9,9 +9,6 @@ public class PersonaDto {
 	protected String apellido;
 	protected String direccion;
 	
-	public PersonaDto() {
-	}
-	
 	
 	public Long getId() {
 		return id;

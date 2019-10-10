@@ -18,7 +18,7 @@ public class JobCita implements org.quartz.Job {
 	HttpEntity<Boolean> entity = new HttpEntity<>(headers);
 	ResponseEntity<Boolean> response = null;
 	
-	public static final Logger LOGGER = LoggerFactory.getLogger(JobCita.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(JobCita.class);
 
 		
 	public void execute(JobExecutionContext context) throws JobExecutionException {

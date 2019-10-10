@@ -125,18 +125,18 @@ public class CitaServiceImpl implements CitaService{
 		return true;
 	}
 		
-	public boolean rechazarCitasVencidas() {				
-		try {
-			List<CitaDto> listadoCitas = citaRepository.obtenerCitasPendientesDePago(LocalDateTime.now());		
-			for (CitaDto cita : listadoCitas) {			
-				if(verificarVencimientoCita(cita, LocalDateTime.now())) {
-					rechazarCitaPorId(cita.getId());
-				}	
-			}
-			return true;
-		} catch (Exception e) {
-			return false;
-		} 	
+	public boolean rechazarCitasVencidas() {
+		List<CitaDto> listadoCitas = citaRepository.obtenerCitasPendientesDePago(LocalDateTime.now());	
+		boolean respuesta = true;
+		for (CitaDto cita : listadoCitas) {			
+			if(verificarVencimientoCita(cita, LocalDateTime.now())) {
+				respuesta = rechazarCitaPorId(cita.getId());
+				if(!respuesta) {
+					return respuesta;
+				}
+			}	
+		}
+		return respuesta;			
 	}
 	
 
